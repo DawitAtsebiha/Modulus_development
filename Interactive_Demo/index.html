@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modulus • Function Demos</title>
+
+  <!-- main styles -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- optional: Google Font for a nicer header -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Modulus - Function Explorer</h1>
+
+    <label for="fn-select" class="picker">
+      <span>Choose a function&nbsp;→</span>
+      <select id="fn-select">
+        <option value="linear">Linear (y = x)</option>
+        <option value="quad">Quadratic (y = 2x²)</option>
+        <option value="cubic">Cubic (y = 2x³)</option>
+        <option value="abs">Absolute (y = |x|)</option>
+        <option value="sqrt">Square root</option>
+        <option value="exp">Exponential (eˣ)</option>
+        <option value="sine">Sine</option>
+        <option value="cos">Cosine</option>
+        <option value="circle">Circle (x² + y² = 1)</option>
+      </select>
+    </label>
+  </header>
+
+  <!-- aspect-ratio 4:3 so it stays responsive -->
+  <div class="canvas">
+    <svg id="plot-area" viewBox="0 0 800 600"></svg>
+  </div>
+
+  <footer>
+    <p>Drag the gold dot to explore points, or just watch it animate!  •  Made with vanilla JS &lt;3</p>
+  </footer>
+
+  <!-- Your main demo script -->
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>

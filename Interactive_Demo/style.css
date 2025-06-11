@@ -1,0 +1,62 @@
+/* Simple, responsive layout – tweak as you like */
+:root {
+  --bg: #fafafa;
+  --fg: #111;
+  --accent: #e91e63;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 600;
+}
+
+.picker span { margin-right: 0.5rem; }
+
+select {
+  font-size: 1rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
+}
+
+.canvas {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+svg {
+  width: min(90vw, 800px);
+  height: calc(min(90vw, 800px) * 0.75); /* 4:3 */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem 1rem;
+  color: #666;
+}
