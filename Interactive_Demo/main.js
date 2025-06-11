@@ -1,4 +1,4 @@
-import {polyGon, circleFunct, sineFunct, vertAxis, horizAxis, polyLine, linearFunct, sqrtFunct, absFunct, cosFunct, cubicFunct, quadraticFunct, expFunct } from "./Demo.js";
+import {circleFunct, sineFunct, vertAxis, horizAxis, polyLine, linearFunct, sqrtFunct, absFunct, cosFunct, cubicFunct, quadraticFunct, expFunct } from "./Demo.js";
 
 const svg = document.querySelector("svg");
 const select = document.querySelector("select");

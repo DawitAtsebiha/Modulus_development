@@ -1,4 +1,4 @@
-import { pool } from './db.js';
+import { pool } from '../pages/src/db.js';
 
 try {
   const insertSingle = `
