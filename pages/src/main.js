@@ -1,6 +1,6 @@
 const allSlideLeftEls  = document.querySelectorAll(".slide-from-left");
 const allSlideRightEls = document.querySelectorAll(".slide-from-right");
-import { pool } from './db.js';
+
 
 
 function animateOnScroll() {
