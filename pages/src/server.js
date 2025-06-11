@@ -42,10 +42,10 @@ app.post('/api/signup', signupLimiter, async (req, res) => {
 
   const sql = `
     INSERT INTO public.users
-           (first_name, last_name, email, password,
+           (first_name, last_name, email, password_hashed,
             date_of_birth, school_status, uni_affiliation)
     VALUES ($1,$2,$3,$4,$5,$6,$7)
-    RETURNING uuid AS id, first_name, last_name, email, created_at;
+    RETURNING user_id AS id, first_name, last_name, email, creation_date;
   `;
 
   try {
