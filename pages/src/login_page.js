@@ -211,18 +211,36 @@ document.addEventListener("DOMContentLoaded", () => {
   function initFormHandlers() {
     // Login form
     if (elements.loginForm) {
-      elements.loginForm.addEventListener("submit", (e) => {
+      elements.loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const email = document.getElementById("login-email")?.value;
-        const password = document.getElementById("login-password")?.value;
         
-        if (!email || !password) {
-          alert("Please fill in all fields");
-          return;
+        const loginData = {
+            email: document.getElementById("login-email")?.value.trim(),
+            password: document.getElementById("login-password")?.value.trim()
         }
-        
-        console.log("Login attempt:", { email });
-        alert("Login functionality would be implemented on the server side.");
+
+        const submitBtn = elements.loginForm.querySelector("button[type=submit]");
+        if (submitBtn) submitBtn.disabled = true;
+
+        try {
+          const response = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(loginData),
+          });
+
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Login failed");
+          
+          alert("Logged in! 🎉");
+          elements.loginForm.reset();
+          currentStep = 1;
+          updateSignupStep();
+        } catch (error) {
+          alert(error.message);
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
       });
     }
 
