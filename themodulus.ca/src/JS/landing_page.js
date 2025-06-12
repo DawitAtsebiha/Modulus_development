@@ -115,3 +115,4 @@ function tickFinal() {
 // Event listeners
 window.addEventListener("scroll", animateOnScroll);
 window.addEventListener("DOMContentLoaded", animateOnScroll);
+
