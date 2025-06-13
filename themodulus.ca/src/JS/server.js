@@ -124,16 +124,19 @@ app.post("/api/login", loginLimiter, async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax",                           // CSRF protection
-        secure: process.env.NODE_ENV === "production", // HTTPS in prod
+        sameSite: "none",                           // CSRF protection
+        secure: true, // HTTPS in prod
         maxAge: 2 * 60 * 60 * 1000,               // 2 hours
       })
       .status(200)
       .json({
         id: u.user_id,
         firstName: u.first_name,
+        dateOfBirth: u.dateOfBirth,
         lastName: u.last_name,
         email: u.email,
+        schoolStatus: u.schoolStatus,
+        uniAffiliation: u.uniAffiliation
       });
   } catch (err) {
     console.error(err);
@@ -143,26 +146,29 @@ app.post("/api/login", loginLimiter, async (req, res) => {
 
 
 
-app.get("/api/me", authMiddleware, (req, res) => {
-  if (!req.currentUser) {
-    return res.status(401).json({ error: "Not authenticated" });
+app.get("/api/me", authMiddleware, async (req, res) => {
+  const { id } = req.currentUser;           // you put "id" in the JWT
+
+  const sql = `
+    SELECT user_id          AS id,
+           first_name       AS "firstName",
+           last_name        AS "lastName",
+           email,
+           date_of_birth    AS "dateOfBirth",
+           creation_date    AS "creationDate",
+           school_status    AS "schoolStatus",
+           uni_affiliation  AS "uniAffiliation"
+      FROM public.users
+     WHERE user_id = $1
+  `;
+  try {
+    const { rows:[user] } = await pool.query(sql, [id]);
+    if (!user) return res.status(404).json({ error:"User not found" });
+    res.json(user);                          // <-- sends all columns
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error:"Failed to load profile" });
   }
-
-  const {
-    user_id,
-    first_name,
-    last_name,
-    email,
-    creation_date,
-  } = req.currentUser;
-
-  res.json({
-    id: user_id,
-    firstName: first_name,
-    lastName: last_name,
-    email,
-    creationDate: creation_date,
-  });
 });
 
 
