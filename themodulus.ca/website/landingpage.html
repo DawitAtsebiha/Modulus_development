@@ -136,6 +136,25 @@
   <div class="w-screen min-h-screen bg-white">
     <div class="w-full min-h-screen flex flex-col lg:flex-row bg-gray-100">
       <!-- LEFT PANEL-->
+      <div
+        class="bg-white w-1/2">
+        <div class="slide-from-left
+               transform -translate-x-full opacity-0
+               transition-all duration-700 ease-out">
+        <div class=" pt-60 pl-32 text-7xl font-semibold">
+          Interactive learning <br>
+          for <span class="text-[#C974C7] font-semibold ">Engineering</span> students
+        </div>
+        <div class="pl-32 text-2xl mt-6">
+          Course driven lessons curated by real life tutors.
+        </div>
+        <div class="pl-32 mt-8">
+          <a href="">
+            <button
+              class="px-8 py-4 rounded-md border border-black bg-white text-black text-lg
+                     hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold"
+            >
+              <a href="/themodulus.ca/website/login_page.html">Get Started</a>
       <div class="bg-white w-full lg:w-1/2 order-2 lg:order-1">
         <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out">
           <div class="pt-8 lg:pt-60 px-6 lg:pl-32 text-4xl md:text-5xl lg:text-7xl font-semibold text-center lg:text-left">
@@ -172,80 +191,21 @@
     </div>
   </div>
 
-  <!-- SECTION 2 -->
-  <body class="font-[Montserrat]">
-    <div id="Features" class="w-screen min-h-screen bg-gray-100 relative overflow-hidden">
-        
-        <div class="flex w-full min-h-screen flex-col">
-            <div class="mt-8 h-auto lg:h-1/4 flex items-center justify-center text-3xl md:text-4xl lg:text-6xl font-bold drop-shadow-2xl p-6 lg:p-0 text-center">
-                Powered by our&ensp;
-                <span class="gradient-text">
-                    deep-learning model
-                </span>
-            </div>
-            
-            <div class="flex-1 lg:h-3/4 flex items-center justify-center p-6 lg:p-0">
-                <div class="flex w-full h-full flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/2 justify-center flex mb-8 lg:mb-0">
-                        <div class="w-[300px] md:w-[400px] lg:w-[450px] h-auto">
-                            <div class="shadow-2xl rounded-3xl ring-1 ring-gray-200 border-4 border-white transform transition hover:scale-105 hover:shadow-4xl w-full bg-white/80 backdrop-blur-sm p-6">
-                                <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
-                                    <h4 class="text-lg font-semibold text-gray-800">ModuleBot</h4>
-
-                                </div>
-                                
-                                <div class="space-y-4 max-h-80 overflow-y-auto">
-                                    <div class="flex justify-end">
-                                        <div class="chat-bubble-user text-white p-3 rounded-2xl rounded-br-md max-w-xs shadow-lg">
-                                            <p class="text-sm">I'm struggling with this derivative. Can you help me find d/dx of x³ + 2x²?</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-start">
-                                        <div class="chat-bubble-ai text-white p-3 rounded-2xl rounded-bl-md max-w-xs shadow-lg">
-                                            <p class="text-sm">Of course! Let's use the power rule: d/dx[x^n] = nx^(n-1)</p>
-                                            <p class="text-xs mt-2 math-formula">d/dx[x³ + 2x²] = 3x² + 4x</p>
-                                        </div>
-                                    </div>
-                                    
-
-                                    <div class="flex justify-end">
-                                        <div class="chat-bubble-user2 text-white p-3 rounded-2xl rounded-br-md max-w-xs shadow-lg">
-                                            <p class="text-sm">That makes sense! Can you show me the steps?</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-start">
-                                        <div class="chat-bubble-ai2 text-white p-3 rounded-2xl rounded-bl-md max-w-xs shadow-lg">
-                                            <p class="text-sm">Step by step:</p>
-                                            <div class="text-xs mt-2 space-y-1 math-formula">
-                                                <p>1. d/dx[x³] = 3x²</p>
-                                                <p>2. d/dx[2x²] = 4x</p>
-                                                <p>3. Final: 3x² + 4x</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4 flex items-center text-gray-500 text-sm">
-                                    <div class="flex space-x-1 mr-2">
-                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
-                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
-                                    </div>
-                                    <span>ModuleBot is thinking...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Content section -->
-                    <div class="w-full lg:w-1/2 flex items-center justify-center">
-                        <div class="text-center lg:text-left max-w-md">
-                            <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">AI-Powered Learning</h3>
-                            <p class="text-lg md:text-xl text-gray-600">Get personalized help with our intelligent chatbot that understands engineering concepts and adapts to your learning style.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+ <!-- SECTION 2 -->
+  <div id="Features" class="w-screen h-screen bg-gray-100">
+    <div class="flex w-full h-full flex-col">
+    <div class="h-1/4 flex items-center justify-center text-6xl font-bold drop-shadow-2xl">Powered by our&ensp; <span class="py-5 bg-gradient-to-r from-[#be5bbd] via-purple-600 to-red-400 bg-clip-text text-transparent ">deep-learning model</span></div>
+    <div class="h-3/4 flex items-center justify-center">
+      <div class="flex w-full h-full flex-row">
+        <div class="w-1/2 justify-center max-h-96 flex">
+          <div class="w-[450px] h-auto ">
+          <img class="shadow-2xl rounded-3xl ring-1 ring-gray-200 border-4 border-white
+               transform transition 
+               hover:scale-105 hover:shadow-4xl" src="/themodulus.ca/visuals/PNGs/chatbotsvg.png" alt="">
+          </div>
         </div>
+        <div class="w-1/2"></div>
+      </div>
     </div>
 
   <!-- SECTION 3-->

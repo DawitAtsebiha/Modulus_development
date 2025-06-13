@@ -5,17 +5,26 @@ import bcrypt from "bcryptjs";
 import { pool } from "./db.js"; // renamed for clarity
 import cors from "cors";
 import jwt from "jsonwebtoken";
+import { authMiddleware } from "./auth.js"
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(
   cors({
-    origin: ["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:5501", "http://127.0.0.1:5501"],
-    methods: ["POST"],
-    allowedHeaders: ["Content-Type"],
+    origin: [
+      "http://127.0.0.1:5500",
+      "http://localhost:5500",
+      "http://127.0.0.1:5501",
+      "http://localhost:5501",
+    ],
+    methods: ["GET", "POST"],            
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+app.use(cookieParser());      
 
 app.use(express.json());
 
@@ -85,18 +94,13 @@ app.post("/api/signup", signupLimiter, async (req, res) => {
 
 
 app.post("/api/login", loginLimiter, async (req, res) => {
-  const {
-    email,
-    password
-  } = req.body;
-
-  // basic validation
+  const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: "Missing email or password" });
   }
 
   try {
-    // 1. pull the user
+    // 1. Pull the user
     const {
       rows: [u],
     } = await pool.query(
@@ -107,27 +111,59 @@ app.post("/api/login", loginLimiter, async (req, res) => {
     );
     if (!u) return res.status(401).json({ error: "Invalid credentials" });
 
-    // 2. check password
+    // 2. Check password
     const ok = await bcrypt.compare(password, u.password_hashed);
     if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
-    // 3. success → issue token (or session)
-
-    const { JWT_SECRET } = process.env;
-
-    const token = jwt.sign({ id: u.user_id }, JWT_SECRET, { expiresIn: "2h" });
-    return res.json({
-      id: u.user_id,
-      firstName: u.first_name,
-      lastName: u.last_name,
-      email: u.email,
-      token,                           // move to cookie if preferred
+    // 3. Success → issue JWT and set cookie
+    const token = jwt.sign({ id: u.user_id }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
     });
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",                           // CSRF protection
+        secure: process.env.NODE_ENV === "production", // HTTPS in prod
+        maxAge: 2 * 60 * 60 * 1000,               // 2 hours
+      })
+      .status(200)
+      .json({
+        id: u.user_id,
+        firstName: u.first_name,
+        lastName: u.last_name,
+        email: u.email,
+      });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Login failed" });
+    res.status(500).json({ error: "Login failed" });
   }
 });
+
+
+
+app.get("/api/me", authMiddleware, (req, res) => {
+  if (!req.currentUser) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  const {
+    user_id,
+    first_name,
+    last_name,
+    email,
+    creation_date,
+  } = req.currentUser;
+
+  res.json({
+    id: user_id,
+    firstName: first_name,
+    lastName: last_name,
+    email,
+    creationDate: creation_date,
+  });
+});
+
 
 // default 3000 if PORT not set
 app.listen(3000);
