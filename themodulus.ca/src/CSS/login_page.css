@@ -547,6 +547,16 @@ select:focus {
   opacity: 0.8;
 }
 
+#success-gif {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 9999;
+}
+.hidden { display: none !important; }
+
 /* Responsive styles */
 @media (max-width: 992px) {
   .container {

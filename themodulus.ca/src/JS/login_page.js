@@ -3,6 +3,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentStep = 1;
   const totalSteps = 3;
 
+  function playGifThenGo() {
+    const gif = document.getElementById("success-gif");
+
+    // stop scrolling & clicks while GIF plays
+    document.body.style.overflow = "hidden";
+
+    gif.classList.remove("hidden");         // reveal
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";   // 🔁 swap to your real route
+    }, 3500);                                    // play for 2.5 s (tweak to taste)
+}
+
+
   // DOM elements - cached once
   const elements = {
     tabs: document.querySelectorAll(".tab"),
@@ -232,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Login failed");
           
-        window.location.assign("dashboard.html"); 
+          playGifThenGo();  
         } catch (error) {
           alert(error.message);
         } finally {
@@ -277,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Signup failed");
           
-        window.location.href = "/dashboard.html";
+          playGifThenGo(); 
 
         } catch (error) {
           alert(error.message);
