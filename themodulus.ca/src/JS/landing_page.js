@@ -1,8 +1,14 @@
 const allSlideLeftEls  = document.querySelectorAll(".slide-from-left");
 const allSlideRightEls = document.querySelectorAll(".slide-from-right");
 
+
+
 // Animation variables
-const words      = ["Physics", "Calculus 1", "Java"];
+const words      = ["Physics", 'at your own pace', "Java" ,"step by step",
+      'Calculus',
+      'with confidence',
+      'interactively',
+      'effectively' ];
 const wrapper    = document.getElementById("changingText")?.parentNode;
 const TYPING      = 150;
 const BACKSPACE   = 100;
@@ -12,6 +18,8 @@ let wIndex      = 0;
 let cIndex      = 0;
 let deleting    = false;
 let animationStarted = false; // Flag to ensure animation only runs once
+
+
 
 function animateOnScroll() {
   allSlideLeftEls.forEach((el) => {
@@ -95,7 +103,7 @@ function startFinal() {
 }
 
 function tickFinal() {
-  const partText = mode === "final1" ? "Become an " : "Engineer";
+  const partText = mode === "final1" ? "Engineering" : "";
   const span = document.getElementById(mode);
   
   span.style.color = randomPastel();

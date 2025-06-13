@@ -10,133 +10,525 @@
   <title>Modulus</title>
   <link rel="icon" href="/themodulus.ca/visuals/SVGs/mod-logo.svg">
   <link rel="stylesheet" href="/themodulus.ca/src/CSS/output.css" />
+
+  <!-- prereqs for tailwind and matterjs demo-->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
   
- 
   <style>
     html, body { overflow-x: hidden; }
     html       { scroll-behavior: smooth; }
+    
+    
+    /* mobile menu toggle */
+    .mobile-menu {
+      display: none;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+
+            .gradient-text {
+            background: linear-gradient(135deg, #C974C7 0%, #B86FC5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .chat-bubble-user {
+            background: linear-gradient(135deg, #C974C7 0%, #B86FC5 100%);
+            animation: slideInRight 0.6s ease-out;
+        }
+        
+        .chat-bubble-ai {
+            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+            animation: slideInLeft 0.6s ease-out 0.3s both;
+        }
+        
+        .chat-bubble-user2 {
+            background: linear-gradient(135deg, #C974C7 0%, #B86FC5 100%);
+            animation: slideInRight 0.6s ease-out 0.6s both;
+        }
+        
+        .chat-bubble-ai2 {
+            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+            animation: slideInLeft 0.6s ease-out 0.9s both;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .math-formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
   </style>
 </head>
-<body class="font-[Inter]">
+<body class="font-[Montserrat]">
   <!-- HEADER -->
-  <div class="w-screen flex items-center h-18 px-12 font-[Inter]">
+  <div class="w-screen flex items-center justify-between h-16 md:h-18 px-4 md:px-12 font-[Montserrat] relative">
     <img
-      class="h-12"
+      class="h-8 md:h-12"
       src="/themodulus.ca/visuals/SVGs/moduluswithlogo.svg"
       alt="Modulus logo"
     />
-    <div class="flex-1 flex justify-center space-x-8">
+    
+    <!-- desktop specific  -->
+    <div class="hidden md:flex flex-1 justify-center space-x-8">
       <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Features">Features</a></button>
       <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Demo">Demo</a></button>
-      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]">Pricing</button>
+      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Pricing">Pricing</button></a>
     </div>
-    <div class="flex space-x-4">
+    
+    <div class="hidden md:flex space-x-4">
       <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
       <button class="px-4 py-2 rounded-md border border-black bg-black text-white text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Sign Up</a></button>
+    </div>
+    
+    <!-- mobile specific -->
+    <button id="mobile-menu-btn" class="md:hidden flex flex-col space-y-1 p-2">
+      <span class="w-6 h-0.5 bg-black"></span>
+      <span class="w-6 h-0.5 bg-black"></span>
+      <span class="w-6 h-0.5 bg-black"></span>
+    </button>
+    
+    <div id="mobile-menu" class="mobile-menu absolute top-16 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+      <div class="flex flex-col p-4 space-y-4">
+        <a href="#Features" class="text-gray-800 py-2 border-b border-gray-100">Features</a>
+        <a href="#Demo" class="text-gray-800 py-2 border-b border-gray-100">Demo</a>
+        <a href="#" class="text-gray-800 py-2 border-b border-gray-100">Pricing</a>
+        <div class="flex flex-col space-y-2 pt-4">
+          <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
+          <button class="px-4 py-2 rounded-md border border-black bg-black text-white text-md"><a href="/themodulus.ca/website/login_page.html">Sign Up</a></button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- SECTION 1 -->
-  <div  class="w-screen h-screen bg-white">
-    <div class="w-full h-full flex justify-between bg-gray-100">
+  <div class="w-screen min-h-screen bg-white">
+    <div class="w-full min-h-screen flex flex-col lg:flex-row bg-gray-100">
       <!-- LEFT PANEL-->
-      <div
-        class="bg-white w-1/2">
-        <div class="slide-from-left
-               transform -translate-x-full opacity-0
-               transition-all duration-700 ease-out">
-        <div class=" pt-60 pl-32 text-7xl font-semibold">
-          Interactive learning <br>
-          for <span class="text-[#C974C7] font-semibold ">Engineering</span> students
-        </div>
-        <div class="pl-32 text-2xl mt-6">
-          Course driven lessons curated by real life tutors.
-        </div>
-        <div class="pl-32 mt-8">
-          <a href="">
-            <button
-              class="px-8 py-4 rounded-md border border-black bg-white text-black text-lg
-                     hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold"
-            >
-              <a href="/themodulus.ca/website/login_page.html">Get Started</a>
+      <div class="bg-white w-full lg:w-1/2 order-2 lg:order-1">
+        <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out">
+          <div class="pt-8 lg:pt-60 px-6 lg:pl-32 text-4xl md:text-5xl lg:text-7xl font-semibold text-center lg:text-left">
+            Interactive learning <br>
+            for <span class="text-[#C974C7] font-semibold">Engineering</span> students
+          </div>
+          <div class="px-6 lg:pl-32 text-lg md:text-xl lg:text-2xl mt-4 lg:mt-6 text-center lg:text-left">
+            Course driven lessons curated by real life tutors.
+          </div>
+          <div class="px-6 lg:pl-32 mt-6 lg:mt-8 text-center lg:text-left">
+            <button class="px-6 md:px-8 py-3 md:py-4 rounded-md border border-black bg-white text-black text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+              <a href="./src/login_page.html">Get Started</a>
             </button>
-          </a>
           </div>
         </div>
       </div>
 
       <!-- RIGHT PANEL-->
-      <div
-        class="w-1/2 bg-white flex justify-center items-center">
-        <div class="slide-from-right px-6 transform translate-x-full opacity-0 transition-all duration-700 ease-out border-2 rounded-3xl py-10 border-white shadow-2xl mb-20 shadow-[#C974C7]">
+      <div class="w-full lg:w-1/2 bg-white flex justify-center items-center py-8 lg:py-0 order-1 lg:order-2">
+        <div class="slide-from-right px-4 md:px-6 transform translate-x-full opacity-0 transition-all duration-700 ease-out border-2 rounded-3xl py-6 md:py-10 border-white shadow-2xl shadow-[#C974C7]">
           <video
             id="hero-video"
             src="/themodulus.ca/visuals/MP4s/Graphs.mp4"
-            class="w-[450px] h-auto "
+            class="w-[300px] md:w-[400px] lg:w-[450px] h-auto"
             autoplay
             loop
             muted
             playsinline
           >
-            Your browser doesn’t support HTML5 Video.
+            Your browser doesn't support HTML5 Video.
           </video>
         </div>
       </div>
     </div>
   </div>
 
- <!-- SECTION 2 -->
-  <div id="Features" class="w-screen h-screen bg-gray-100">
-    <div class="flex w-full h-full flex-col">
-    <div class="h-1/4 flex items-center justify-center text-6xl font-bold drop-shadow-2xl">Powered by our&ensp; <span class="py-5 bg-gradient-to-r from-[#be5bbd] via-purple-600 to-red-400 bg-clip-text text-transparent">deep-learning model</span></div>
-    <div class="h-3/4 flex items-center justify-center">
-      <div class="flex w-full h-full flex-row">
-        <div class="w-1/2 justify-center max-h-96 flex">
-          <div class="w-[450px] h-auto ">
-          <img class="shadow-2xl rounded-3xl ring-1 ring-gray-200 border-4 border-white
-               transform transition 
-               hover:scale-105 hover:shadow-4xl" src="/themodulus.ca/visuals/PNGs/chatbotsvg.png" alt="">
-          </div>
-        </div>
-        <div class="w-1/2"></div>
-      </div>
-    </div>
-    </div>
-    
-  </div>
+  <!-- SECTION 2 -->
+  <body class="font-[Montserrat]">
+    <div id="Features" class="w-screen min-h-screen bg-gray-100 relative overflow-hidden">
+        
+        <div class="flex w-full min-h-screen flex-col">
+            <div class="mt-28 h-auto lg:h-1/4 flex items-center justify-center text-3xl md:text-4xl lg:text-6xl font-bold drop-shadow-2xl p-6 lg:p-0 text-center">
+                Powered by our&ensp;
+                <span class="gradient-text">
+                    deep-learning model
+                </span>
+            </div>
+            
+            <div class="flex-1 lg:h-3/4 flex items-center justify-center p-6 lg:p-0">
+                <div class="flex w-full h-full flex-col lg:flex-row">
+                    <!-- Interactive Chat Demo -->
+                    <div class="w-full lg:w-1/2 justify-center flex mb-8 lg:mb-0">
+                        <div class="w-[300px] md:w-[400px] lg:w-[450px] h-auto">
+                            <div class="shadow-2xl rounded-3xl ring-1 ring-gray-200 border-4 border-white transform transition hover:scale-105 hover:shadow-4xl w-full bg-white/80 backdrop-blur-sm p-6">
+                                <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+                                    <h4 class="text-lg font-semibold text-gray-800">ModuleBot</h4>
 
+                                </div>
+                                
+                                <div class="space-y-4 max-h-80 overflow-y-auto">
+                                    <!-- User message -->
+                                    <div class="flex justify-end">
+                                        <div class="chat-bubble-user text-white p-3 rounded-2xl rounded-br-md max-w-xs shadow-lg">
+                                            <p class="text-sm">I'm struggling with this derivative. Can you help me find d/dx of x³ + 2x²?</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI response -->
+                                    <div class="flex justify-start">
+                                        <div class="chat-bubble-ai text-white p-3 rounded-2xl rounded-bl-md max-w-xs shadow-lg">
+                                            <p class="text-sm">Of course! Let's use the power rule: d/dx[x^n] = nx^(n-1)</p>
+                                            <p class="text-xs mt-2 math-formula">d/dx[x³ + 2x²] = 3x² + 4x</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- User follow-up -->
+                                    <div class="flex justify-end">
+                                        <div class="chat-bubble-user2 text-white p-3 rounded-2xl rounded-br-md max-w-xs shadow-lg">
+                                            <p class="text-sm">That makes sense! Can you show me the steps?</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI detailed response -->
+                                    <div class="flex justify-start">
+                                        <div class="chat-bubble-ai2 text-white p-3 rounded-2xl rounded-bl-md max-w-xs shadow-lg">
+                                            <p class="text-sm">Step by step:</p>
+                                            <div class="text-xs mt-2 space-y-1 math-formula">
+                                                <p>1. d/dx[x³] = 3x²</p>
+                                                <p>2. d/dx[2x²] = 4x</p>
+                                                <p>3. Final: 3x² + 4x</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Typing indicator -->
+                                <div class="mt-4 flex items-center text-gray-500 text-sm">
+                                    <div class="flex space-x-1 mr-2">
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                    </div>
+                                    <span>ModuleBot is thinking...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content section -->
+                    <div class="w-full lg:w-1/2 flex items-center justify-center">
+                        <div class="text-center lg:text-left max-w-md">
+                            <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">AI-Powered Learning</h3>
+                            <p class="text-lg md:text-xl text-gray-600">Get personalized help with our intelligent chatbot that understands engineering concepts and adapts to your learning style.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <!-- SECTION 3-->
-<div class="bg-black w-screen h-screen">
-  <div class="flex w-full h-full">
-    <div class="w-1/2 flex items-center justify-center slide-from-left
-               transform -translate-x-full opacity-0
-               transition-all duration-700 ease-out">
-      <div class="text-white font-semibold">
-        <div class="w-xl h-96 flex justify-center items-center  rounded-3xl  
-                 border-2 border-[#C974C7]
-               transform transition 
-               hover:scale-105 hover:shadow-4xl">
-        <img src="/themodulus.ca/visuals/PNGs/limderivhero.png" alt="Path Drawing showing user going from Limits to Derivatives.">
-        </div>
-        <div class="text-2xl py-5 text-center">Access our hand-tailored library of courses <br> in bite sized format.</div>
-      </div>
+<div class="bg-black w-screen min-h-screen relative overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-32 h-32 border border-purple-500 rounded-full animate-spin" style="animation-duration: 20s;"></div>
+      <div class="absolute bottom-20 right-10 w-24 h-24 border border-pink-500 rounded-full animate-spin" style="animation-duration: 15s; animation-direction: reverse;"></div>
+      <div class="absolute top-1/2 left-1/4 w-16 h-16 border border-purple-400 rotate-45 animate-pulse"></div>
     </div>
+    
+    <div class="flex w-full min-h-screen flex-col lg:flex-row relative z-10">
+      <!-- Enhanced Left Panel with Interactive Course Path -->
+      <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+        <div class="text-white font-semibold text-center max-w-lg">
+          <!-- Interactive Course Journey -->
+          <div class="relative">
+            <!-- Course Path Visualization -->
+            <div class="space-y-8 mb-8">
+              <!-- Limits Course -->
+              <div class="course-card floating rounded-2xl p-6 transition-all duration-300 cursor-pointer group" style="animation-delay: 0s;">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center neon-glow">
+                      <span class="math-symbol text-white">∞</span>
+                    </div>
+                    <div class="text-left">
+                      <h3 class="text-lg font-bold">Limits</h3>
+                      <p class="text-sm text-gray-300">Foundation concepts</p>
+                    </div>
+                  </div>
+                  <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center group-hover:bg-purple-400 transition-colors">
+                    <div class="w-3 h-3 bg-white rounded-full group-hover:bg-white"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex justify-center">
+                <div class="connection-line w-1 h-8"></div>
+              </div>
+              
 
-    <div class="w-1/2 flex items-center justify-center">
-      <div class="text-white font-semibold text-8xl">
-        <span id="prefix">Learn </span><span id="changingText"></span>
+              <div class="course-card floating rounded-2xl p-6 transition-all duration-300 cursor-pointer group" style="animation-delay: 1s;">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center neon-glow">
+                      <span class="math-symbol text-white">f'</span>
+                    </div>
+                    <div class="text-left">
+                      <h3 class="text-lg font-bold">Derivatives</h3>
+                      <p class="text-sm text-gray-300">Rate of change</p>
+                    </div>
+                  </div>
+                  <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center group-hover:bg-blue-400 transition-colors">
+                    <div class="w-3 h-3 bg-white rounded-full group-hover:bg-white"></div>
+                  </div>
+                </div>
+              </div>
+              
+
+              <div class="flex justify-center">
+                <div class="connection-line w-1 h-8"></div>
+              </div>
+              
+
+              <div class="course-card floating rounded-2xl p-6 transition-all duration-300 cursor-pointer group" style="animation-delay: 2s;">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center neon-glow">
+                      <span class="math-symbol text-white">∫</span>
+                    </div>
+                    <div class="text-left">
+                      <h3 class="text-lg font-bold">Integration</h3>
+                      <p class="text-sm text-gray-300">Area under curves</p>
+                    </div>
+                  </div>
+                  <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center group-hover:bg-green-400 transition-colors">
+                    <div class="w-3 h-3 bg-white rounded-full group-hover:bg-white"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-lg md:text-xl lg:text-2xl py-5 leading-relaxed">
+            Access our <span class="text-purple-400 font-bold">hand-tailored library</span> of courses<br class="hidden md:block"> 
+            in <span class="text-purple-400">bite-sized format</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Right Panel with Dynamic Text -->
+      <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-0">
+        <div class="text-white font-semibold text-center">
+          <div class="text-4xl md:text-6xl lg:text-8xl mb-4">
+            <span class="gradient-text">Learn</span>
+          </div>
+          <div class="text-2xl md:text-4xl lg:text-6xl">
+            <div class="typing-animation inline-block" id="changingText">
+              at your own pace
+            </div>
+          </div>
+          <div class="mt-8 text-lg md:text-xl text-gray-300 max-w-md mx-auto">
+            Master engineering concepts through our structured learning paths designed by experts.
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- SECTION 4 DEMO-->
-<div id="Demo" class="bg-white w-screen h-screen">
+  <!-- SECTION 4 DEMO-->
+  <div id="Demo" class="bg-white w-screen min-h-screen flex items-center justify-center">
+    <div class="text-center p-6">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Demo Coming Soon</h2>
+      <p class="text-lg md:text-xl text-gray-600">Experience our platform in action</p>
+    </div>
+  </div>
 
-</div>
 
-
-<script type="module" src="/themodulus.ca/src/JS/landing_page.js"></script>
+  <!-- SECTION 5 PRICING -->
+    <div id="Pricing" class="bg-gradient-to-br from-gray-50 to-white w-screen min-h-screen py-16">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Choose Your Plan</h2>
+            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Start your engineering journey with the perfect plan for your needs</p>
+          </div>
+          
+          <div class="flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 max-w-6xl mx-auto">
+            
+            <!-- Basic Plan -->
+            <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm">
+              <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
+                <div class="text-center mb-8">
+                  <h3 class="text-2xl font-bold text-gray-800 mb-2">MONTHLY</h3>
+                  <div class="text-4xl font-bold text-gray-900 mb-2">$6.99<span class="text-lg text-gray-600">/month</span></div>
+                  <p class="text-gray-600">Perfect for getting started</p>
+                </div>
+                
+                <ul class="space-y-4 mb-8 flex-grow">
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Access to all courses</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Access to the ModuleBot</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Progress tracking</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Community access</span>
+                  </li>
+                </ul>
+                
+                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] text-[#C974C7] hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+                  Get Started
+                </button>
+              </div>
+            </div>
+            
+            <!-- Pro Plan (for now, free) -->
+            <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm" style="animation-delay: 0.2s;">
+              <div class="bg-gradient-to-br from-[#C974C7] to-purple-600 rounded-3xl shadow-2xl p-8 h-full flex flex-col relative transform scale-105 hover:scale-110 transition-all duration-300">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span class="bg-yellow-400 text-yellow-900 px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
+                </div>
+                
+                <div class="text-center mb-8">
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">LAUNCH SPECIAL 🎉 </h3>
+                  <div class="text-4xl font-bold text-gray-900 mb-2"> <span class="line-through">$4.99/month</span> <span>FREE</span><span class="text-lg text-gray-600"></span></div>
+                  <p class="text-gray-700">Celebrate our Launch</p>
+                </div>
+                
+                <ul class="space-y-4 mb-8 flex-grow">
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-800">Access to our library for the semester.</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-800">Advanced AI tutoring</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-800">Personalized study paths</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-800">Priority support</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-800">Offline downloads</span>
+                  </li>
+                </ul>
+                
+                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+                  Get Started
+                </button>
+              </div>
+            </div>
+            
+            <div class="slide-from-right transform translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm">
+              <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
+                <div class="text-center mb-8">
+                  <h3 class="text-2xl font-bold text-gray-800 mb-2">SEMESTER</h3>
+                  <div class="text-4xl font-bold text-gray-900 mb-2">$4.99<span class="text-lg text-gray-600">/month</span></div>
+                  <p class="text-gray-600">Access our library for a whole semester!</p>
+                </div>
+                
+                <ul class="space-y-4 mb-8 flex-grow">
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Everything in Monthly</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Extended ModuleBot use</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Priority Support</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Analytics dashboard</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Discounted price</span>
+                  </li>
+                </ul>
+                
+                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+                  Get Started
+                </button>
+              </div>
+            </div>
+            
+          </div>
+        
+        </div>
+      </div>
+         <script src="/themodulus.ca/src/JS/landing_page.js"></script>
 </body>
 </html>
