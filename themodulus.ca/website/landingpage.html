@@ -26,8 +26,8 @@
       alt="Modulus logo"
     />
     <div class="flex-1 flex justify-center space-x-8">
-      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]">Features</button>
-      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]">About</button>
+      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Features">Features</a></button>
+      <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Demo">Demo</a></button>
       <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]">Pricing</button>
     </div>
     <div class="flex space-x-4">
@@ -37,7 +37,7 @@
   </div>
 
   <!-- SECTION 1 -->
-  <div class="w-screen h-screen bg-white">
+  <div  class="w-screen h-screen bg-white">
     <div class="w-full h-full flex justify-between bg-gray-100">
       <!-- LEFT PANEL-->
       <div
@@ -58,7 +58,7 @@
               class="px-8 py-4 rounded-md border border-black bg-white text-black text-lg
                      hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold"
             >
-              Get Started
+              <a href="./src/login_page.html">Get Started</a>
             </button>
           </a>
           </div>
@@ -86,7 +86,7 @@
   </div>
 
  <!-- SECTION 2 -->
-  <div class="w-screen h-screen bg-gray-100">
+  <div id="Features" class="w-screen h-screen bg-gray-100">
     <div class="flex w-full h-full flex-col">
     <div class="h-1/4 flex items-center justify-center text-6xl font-bold drop-shadow-2xl">Powered by our&ensp; <span class="py-5 bg-gradient-to-r from-[#be5bbd] via-purple-600 to-red-400 bg-clip-text text-transparent ">deep-learning model</span></div>
     <div class="h-3/4 flex items-center justify-center">
@@ -95,7 +95,7 @@
           <div class="w-[450px] h-auto ">
           <img class="shadow-2xl rounded-3xl ring-1 ring-gray-200 border-4 border-white
                transform transition 
-               hover:scale-105 hover:shadow-4xl" src="/" alt="">
+               hover:scale-105 hover:shadow-4xl" src="/themodulus.ca/visuals/PNGs/chatbotsvg.png" alt="">
           </div>
         </div>
         <div class="w-1/2"></div>
@@ -113,11 +113,11 @@
                transform -translate-x-full opacity-0
                transition-all duration-700 ease-out">
       <div class="text-white font-semibold">
-        <div class="w-xl h-96 flex justify-center items-center bg-white rounded-3xl  
-               shadow-2xl ring-1 ring-gray-200 border-4 border-[#C974C7]
+        <div class="w-xl h-96 flex justify-center items-center  rounded-3xl  
+                 border-2 border-[#C974C7]
                transform transition 
                hover:scale-105 hover:shadow-4xl">
-        <img src="/themodulus.ca/visuals/PNGs/pathdrawing.png" alt="Path Drawing showing user going from Limits to Derivatives.">
+        <img src="/themodulus.ca/visuals/PNGs/limderivhero.png" alt="Path Drawing showing user going from Limits to Derivatives.">
         </div>
         <div class="text-2xl py-5 text-center">Access our hand-tailored library of courses <br> in bite sized format.</div>
       </div>
@@ -131,7 +131,12 @@
   </div>
 </div>
 
+<!-- SECTION 4 DEMO-->
+<div id="Demo" class="bg-white w-screen h-screen">
 
-<script type="module" src="/themodulus.ca/src/JS/main.js"></script>
+</div>
+
+
+<script type="module" src="/themodulus.ca/src/JS/landing_page.js"></script>
 </body>
 </html>
