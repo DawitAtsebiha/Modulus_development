@@ -232,10 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Login failed");
           
-          alert("Logged in! 🎉");
-          elements.loginForm.reset();
-          currentStep = 1;
-          updateSignupStep();
+        window.location.assign("dashboard.html"); 
         } catch (error) {
           alert(error.message);
         } finally {
@@ -280,10 +277,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Signup failed");
           
-          alert("Account created 🎉");
-          elements.signupForm.reset();
-          currentStep = 1;
-          updateSignupStep();
+        window.location.href = "/dashboard.html";
+
         } catch (error) {
           alert(error.message);
         } finally {

@@ -207,7 +207,54 @@
 
               <div class="form-group">
                 <label for="dateOfBirth">Date of Birth</label>
-                <input type="date" id="dateOfBirth" required />
+                <input 
+                type="date" 
+                id="dateOfBirth"
+                min="1950-01-01"
+                max="2010-12-31"
+                required />
+
+                <span id="dobError" style="color:red;display:none;">
+                  Please enter a valid date of birth.
+                </span>
+
+              <script>
+                const dateInput = document.getElementById('dateOfBirth');
+                const errorMsg  = document.getElementById('dobError');
+
+                const nextButtons = document.querySelectorAll('.next-btn');
+                function toggleNext(isValid) {
+                  nextButtons.forEach(btn => (btn.disabled = !isValid));
+                }
+
+                dateInput.addEventListener('input', () => {
+                  // If the field is blank, clear any previous error and stop.
+                  if (!dateInput.value) {
+                    errorMsg.style.display = 'none';
+                    dateInput.setCustomValidity('');
+                    toggleNext(false);
+                    return;
+                  }
+
+                  // YYYY-MM-DD → split once and reuse.
+                  const [year, month, day] = dateInput.value.split('-');
+
+                  // 2. Separate, accurate checks
+                  const validYear = /^(19[5-9]\d|200\d|2010)$/.test(year);    // 1950 - 2010
+                  const validMonth = /^(0[1-9]|1[0-2])$/.test(month);         // 01–12
+                  const validDay   = /^(0[1-9]|[12]\d|3[01])$/.test(day);     // 01–31
+
+                  if (validYear && validMonth && validDay) {
+                    errorMsg.style.display = 'none';
+                    dateInput.setCustomValidity('');
+                  } else {
+                    errorMsg.style.display = 'inline';
+                    dateInput.setCustomValidity('Please enter a valid date of birth.');
+                    toggleNext(true);
+                  }
+                });   
+              </script>
+
               </div>
 
               <div class="step-navigation">
