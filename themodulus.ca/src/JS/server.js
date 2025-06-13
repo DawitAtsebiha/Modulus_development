@@ -68,7 +68,7 @@ app.post("/api/signup", signupLimiter, async (req, res) => {
     VALUES ($1,$2,$3,$4,$5,$6,$7)
     RETURNING user_id AS id, first_name, last_name, email, creation_date;
   `;
-
+  
   try {
     const {
       rows: [user],
@@ -82,6 +82,7 @@ app.post("/api/signup", signupLimiter, async (req, res) => {
       uniAffiliation || "None",
     ]);
     return res.status(201).json(user);
+    
   } catch (err) {
     if (err.code === "23505") {
       // unique_violation
