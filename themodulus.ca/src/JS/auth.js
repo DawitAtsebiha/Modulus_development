@@ -27,7 +27,7 @@ export async function authMiddleware(req, res, next) {
     );
     if (!user) return res.status(401).json({ error: "User not found" });
 
-    req.currentUser = user;               // stash for later routes
+    req.currentUser = { id: payload.id };               // stash for later routes
     next();                               // continue
   } catch (err) {
     console.error("authMiddleware:", err.message);

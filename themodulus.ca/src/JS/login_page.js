@@ -240,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const response = await fetch('http://localhost:3000/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials:"include",
             body: JSON.stringify(loginData),
           });
 
@@ -285,6 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const response = await fetch('http://localhost:3000/api/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials:"include",
             body: JSON.stringify(formData),
           });
 
@@ -301,6 +303,66 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+
+  function initDashboard() {
+    const loadingEl = document.getElementById('loading');
+    if (!loadingEl) return;            // ← not on dashboard.html
+
+    const FIELD_LABEL = {
+      id:            'User ID',          // <-- note: server returns id not uuid
+      firstName:     'First name',
+      lastName:      'Last name',
+      email:         'Email',
+      creationDate:  'Joined',
+      schoolStatus:  'School status',
+      uniAffiliation:'University / College',
+      dateOfBirth:   'Date of birth'
+    };
+
+    const profileEl = document.getElementById('profile');
+    const errorEl   = document.getElementById('error');
+
+    function renderProfile(data){
+      profileEl.innerHTML='';
+      Object.entries(FIELD_LABEL).forEach(([key,label])=>{
+        if(data[key]===undefined) return;
+        const dt=document.createElement('dt'); dt.textContent=label;
+        const dd=document.createElement('dd'); dd.textContent=data[key]||'—';
+        profileEl.append(dt,dd);
+      });
+    }
+
+    async function loadProfile(){
+      loadingEl.style.display='flex';
+      errorEl.style.display='none';
+      profileEl.style.display='none';
+
+      try{
+        const res = await fetch('http://localhost:3000/api/me',{
+          credentials:'include'});
+
+        if(!res.ok) throw new Error('HTTP '+res.status);
+        const json = await res.json();
+        
+        renderProfile(json);
+        profileEl.style.display='grid';
+      }catch(err){
+        errorEl.textContent='Unable to load profile: '+err.message;
+        errorEl.style.display='block';
+      }finally{
+        loadingEl.style.display='none';
+      }
+    }
+
+    // logout
+    document.getElementById('logout').addEventListener('click',async e=>{
+      e.preventDefault();
+      await fetch(API_LOGOUT,{method:'POST',credentials:'include'}).catch(()=>{});
+      window.location.href = '/';
+    });
+
+  loadProfile();
+};
 
   // Social login buttons
   function initSocialButtons() {
@@ -324,6 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFormHandlers();
     initSocialButtons();
     updateSignupStep();
+    initDashboard();
   }
 
   // Start the application

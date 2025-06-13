@@ -549,11 +549,11 @@ select:focus {
 
 #success-gif {
   position: fixed;
-  inset: 0;
+  inset: 0;               /* top/right/bottom/left = 0 → full screen  */
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
-  z-index: 9999;
+  object-fit: cover;      /* fill without squishing */
+  z-index: 9999;          /* above everything */
 }
 .hidden { display: none !important; }
 
