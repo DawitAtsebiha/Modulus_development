@@ -204,7 +204,7 @@
   </div>
   
   <div class="relative z-10 flex w-full min-h-screen flex-col lg:flex-row items-center">
-    <!-- left side -->
+    <!-- Left side - Course cards -->
     <div class="w-full lg:w-1/2 flex flex-col items-center justify-center p-6 lg:p-12">
       <div class="text-gray-800 text-3xl md:text-4xl font-bold mb-12 text-center">
         Master Core <span class="gradient-text">Concepts</span>
@@ -256,29 +256,25 @@
                 <p class="text-sm text-gray-500">Area under curves</p>
               </div>
             </div>
-          </div>
-
-          <div class="text-lg md:text-xl lg:text-2xl py-5 leading-relaxed">
-            Access our <span class="text-purple-400 font-bold">hand-tailored library</span> of courses<br class="hidden md:block"> 
-            in <span class="text-purple-400">bite-sized format</span>.
+            <div class="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center group-hover:border-[#C974C7] group-hover:bg-[#C974C7] transition-colors">
+              <div class="w-3 h-3 bg-gray-300 rounded-full group-hover:bg-white transition-colors"></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Enhanced Right Panel with Dynamic Text -->
-      <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-0">
-        <div class="text-white font-semibold text-center">
-          <div class="text-4xl md:text-6xl lg:text-8xl mb-4">
-            <span class="gradient-text">Learn</span>
-          </div>
-          <div class="text-2xl md:text-4xl lg:text-6xl">
-            <div class="typing-animation inline-block" id="changingText">
-              at your own pace
-            </div>
-          </div>
-          <div class="mt-8 text-lg md:text-xl text-gray-300 max-w-md mx-auto">
-            Master engineering concepts through our structured learning paths designed by experts.
-          </div>
+    </div>
+    
+    <!-- Right side - Learn text with typewriter -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+      <div class="text-center lg:text-left max-w-lg">
+        <div class="text-5xl md:text-6xl lg:text-8xl font-bold mb-6">
+          <span class="gradient-text">Learn</span>
+        </div>
+        <div class="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-8">
+          <div class="typing-animation inline-block" id="changingText">at your own pace</div>
+        </div>
+        <div class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+          Master engineering concepts through our structured learning paths designed by experts and tailored to your learning style.
         </div>
         <button class="px-8 py-4 rounded-xl border-2 border-[#C974C7] bg-[#C974C7] text-white hover:shadow-[6px_6px_0px_0px_rgba(201,116,199,0.3)] hover:bg-white hover:text-[#C974C7] transition-all duration-200 font-bold text-lg">
           Start Learning
@@ -287,7 +283,6 @@
     </div>
   </div>
 </div>
-
 
 
   <!-- SECTION 4 DEMO-->
@@ -301,159 +296,158 @@
 
   <!-- SECTION 5 PRICING -->
     <div id="Pricing" class="bg-gradient-to-br from-gray-50 to-white w-screen min-h-screen py-16">
-        <div class="container mx-auto px-6">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Choose Your Plan</h2>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Start your engineering journey with the perfect plan for your needs</p>
+  <div class="container mx-auto px-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Choose Your Plan</h2>
+      <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">Start your engineering journey with the perfect plan for your needs</p>
+    </div>
+    
+    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-12 max-w-6xl mx-auto">
+      
+      <!-- Basic Plan -->
+      <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm z-10">
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">MONTHLY</h3>
+            <div class="text-4xl font-bold text-gray-900 mb-2">$6.99<span class="text-lg text-gray-600">/month</span></div>
+            <p class="text-gray-600">Perfect for getting started</p>
           </div>
           
-          <div class="flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 max-w-6xl mx-auto">
-            
-            <!-- Basic Plan -->
-            <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm">
-              <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
-                <div class="text-center mb-8">
-                  <h3 class="text-2xl font-bold text-gray-800 mb-2">MONTHLY</h3>
-                  <div class="text-4xl font-bold text-gray-900 mb-2">$6.99<span class="text-lg text-gray-600">/month</span></div>
-                  <p class="text-gray-600">Perfect for getting started</p>
-                </div>
-                
-                <ul class="space-y-4 mb-8 flex-grow">
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Access to all courses</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Access to the ModuleBot</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Progress tracking</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Community access</span>
-                  </li>
-                </ul>
-                
-                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] text-[#C974C7] hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
-                  Get Started
-                </button>
-              </div>
-            </div>
-            
-            <!-- Pro Plan (for now, free) -->
-            <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm" style="animation-delay: 0.2s;">
-              <div class="bg-gradient-to-br from-[#C974C7] to-purple-600 rounded-3xl shadow-2xl p-8 h-full flex flex-col relative transform scale-105 hover:scale-110 transition-all duration-300">
-                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span class="bg-yellow-400 text-yellow-900 px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
-                </div>
-                
-                <div class="text-center mb-8">
-                  <h3 class="text-2xl font-bold text-gray-900 mb-2">LAUNCH SPECIAL 🎉 </h3>
-                  <div class="text-4xl font-bold text-gray-900 mb-2"> <span class="line-through">$4.99/month</span> <span>FREE</span><span class="text-lg text-gray-600"></span></div>
-                  <p class="text-gray-700">Celebrate our Launch</p>
-                </div>
-                
-                <ul class="space-y-4 mb-8 flex-grow">
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-800">Access to our library for the semester.</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-800">Advanced AI tutoring</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-800">Personalized study paths</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-800">Priority support</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-800">Offline downloads</span>
-                  </li>
-                </ul>
-                
-                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
-                  Get Started
-                </button>
-              </div>
-            </div>
-            
-            <div class="slide-from-right transform translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm">
-              <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
-                <div class="text-center mb-8">
-                  <h3 class="text-2xl font-bold text-gray-800 mb-2">SEMESTER</h3>
-                  <div class="text-4xl font-bold text-gray-900 mb-2">$4.99<span class="text-lg text-gray-600">/month</span></div>
-                  <p class="text-gray-600">Access our library for a whole semester!</p>
-                </div>
-                
-                <ul class="space-y-4 mb-8 flex-grow">
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Everything in Monthly</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Extended ModuleBot use</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Priority Support</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Analytics dashboard</span>
-                  </li>
-                  <li class="flex items-center">
-                    <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="text-gray-700">Discounted price</span>
-                  </li>
-                </ul>
-                
-                <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
-                  Get Started
-                </button>
-              </div>
-            </div>
-            
-          </div>
-        
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Access to all courses</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Access to the ModuleBot</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Progress tracking</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Community access</span>
+            </li>
+          </ul>
+          
+          <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] text-[#C974C7] hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+            Get Started
+          </button>
         </div>
       </div>
+      
+      <!-- Pro Plan (for now, free) -->
+      <div class="slide-from-left transform -translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm z-20" style="animation-delay: 0.2s;">
+        <div class="bg-gradient-to-br from-[#C974C7] to-purple-600 rounded-3xl shadow-2xl p-8 h-full flex flex-col relative scale-105 hover:scale-110 transition-all duration-300">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            <span class="bg-yellow-400 text-yellow-900 px-4 py-1 rounded-full text-sm font-bold">MOST POPULAR</span>
+          </div>
+          
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">LAUNCH SPECIAL 🎉 </h3>
+            <div class="text-4xl font-bold text-gray-900 mb-2"> <span class="line-through">$4.99/month</span> <span>FREE</span><span class="text-lg text-gray-600"></span></div>
+            <p class="text-gray-700">Celebrate our Launch</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-800">Access to our library for the semester.</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-800">Advanced AI tutoring</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-800">Personalized study paths</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-800">Priority support</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-gray-900 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-800">Offline downloads</span>
+            </li>
+          </ul>
+          
+          <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+            Get Started
+          </button>
+        </div>
+      </div>
+      
+      <!-- Semester Plan -->
+      <div class="slide-from-right transform translate-x-full opacity-0 transition-all duration-700 ease-out w-full max-w-sm z-10">
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-2xl transition-all duration-300">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">SEMESTER</h3>
+            <div class="text-4xl font-bold text-gray-900 mb-2">$4.99<span class="text-lg text-gray-600">/month</span></div>
+            <p class="text-gray-600">Access our library for a whole semester!</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Everything in Monthly</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Extended ModuleBot use</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Priority Support</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Analytics dashboard</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-[#C974C7] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700">Discounted price</span>
+            </li>
+          </ul>
+          
+          <button class="w-full px-6 py-3 rounded-xl border-2 border-[#C974C7] bg-white text-[#C974C7]  text-base md:text-lg hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200 font-bold">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
          <script src="/themodulus.ca/src/JS/landing_page.js"></script>
 </body>
 </html>
