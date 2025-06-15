@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/themodulus.ca/src/CSS/output.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- prereqs for tailwind and matterjs demo-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <title>Modulus</title>
+
+    <style>
+    html, body { overflow-x: hidden; }
+    html       { scroll-behavior: smooth; }
+    
+    
+    /* mobile menu toggle */
+    .mobile-menu {
+      display: none;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+</style>
+    
+</head>
+<body class="font-[Montserrat]">
+    <!-- NAV BAR -->
+        <div class="w-screen flex items-center justify-between p-12 h-16 md:h-18 px-4 md:px-12 font-[Montserrat] relative bg-[#F1F0F8]">
+            <img
+            class="h-6 md:h-10"
+            src="/themodulus.ca/visuals/SVGs/moduluswithlogo.svg"
+            alt="Modulus logo"
+            />
+            
+            <!-- desktop specific  -->
+            <div class="hidden md:flex flex-1 justify-center space-x-8">
+            <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Features">features</a></button>
+            <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Demo">lorem</a></button>
+            <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Pricing">pricing</button></a>
+            </div>
+            
+            <div class="hidden md:flex space-x-4">
+            <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
+            <button class="px-4 py-2 rounded-md border border-black bg-black text-white text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Sign Up</a></button>
+            </div>
+            
+            <!-- mobile specific -->
+            <button id="mobile-menu-btn" class="md:hidden flex flex-col space-y-1 p-2">
+            <span class="w-6 h-0.5 bg-black"></span>
+            <span class="w-6 h-0.5 bg-black"></span>
+            <span class="w-6 h-0.5 bg-black"></span>
+            </button>
+            
+            <div id="mobile-menu" class="mobile-menu absolute top-16 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+            <div class="flex flex-col p-4 space-y-4">
+                <a href="#Features" class="text-gray-800 py-2 border-b border-gray-100">features</a>
+                <a href="#Demo" class="text-gray-800 py-2 border-b border-gray-100">demo</a>
+                <a href="#" class="text-gray-800 py-2 border-b border-gray-100">pricing</a>
+                <div class="flex flex-col space-y-2 pt-4">
+                <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md"><a href="/themodulus.ca/website/login_page.html">log In</a></button>
+                <button class="px-4 py-2 rounded-md border border-black bg-black text-white text-md"><a href="/themodulus.ca/website/login_page.html">sign Up</a></button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <!-- LEFT SIDE -->
+    <div class="w-screen h-screen bg-[#F1F0F8]">\
+        <div class="flex flex-col">
+            <div class="w-full lg:w-1/2 flex justify-center items-center py-8 lg:py-0 px-4 lg:px-8">
+                <div class="flex flex-col text-left  lg:text-7xl space-y-1 mt-52 text-2xl drop-shadow-2xl font-bold">
+                    <span>interactive</span>
+                    <span>learning for</span>
+                    <span></span>
+                    <span class="text-purple-600 font-extrabold">engineering</span>
+                    <span>students</span>
+                </div>
+                </div>
+          
+            <div class="w-full lg:w-1/2 flex justify-center items-center py-8 lg:py-0 px-4 lg:px-6 mr-12">The first study platform that <br> actually understands your engineering courses.</div>
+            
+        </div>
+
+    </div>
+    <div class="w-screen h-screen bg-[#F1F0F8]"></div>
+    
+</body>
+</html>
