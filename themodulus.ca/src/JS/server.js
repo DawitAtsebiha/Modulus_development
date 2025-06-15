@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import { authMiddleware } from "./auth.js"
 import cookieParser from "cookie-parser";
 import { sendVerificationCode } from "./mailer.js";
-import crypto from "crypto";
 
 const app = express();
 
@@ -242,6 +241,21 @@ app.get("/api/me", authMiddleware, async (req, res) => {
   }
 });
 
+app.get("/api/logout", authMiddleware, async (req, res) => {
+  try {
+    // Clear the token cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+
+    res.json({ message: "Successfully logged out." });
+  } catch (err) {
+    console.error("Logout error:", err);
+    res.status(500).json({ error: "Logout failed." });
+  }
+});
 
 // default 3000 if PORT not set
 app.listen(3000);

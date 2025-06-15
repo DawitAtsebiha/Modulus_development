@@ -407,8 +407,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // logout
     document.getElementById('logout').addEventListener('click',async e=>{
       e.preventDefault();
-      await fetch(API_LOGOUT,{method:'POST',credentials:'include'}).catch(()=>{});
-      window.location.href = '/';
+      await fetch('http://localhost:3000/api/logout',{
+        method:'GET',
+        credentials:'include'
+      }).catch(()=>{});
+      window.location.href = '/themodulus.ca/website/landing_page.html';
     });
 
   loadProfile();
