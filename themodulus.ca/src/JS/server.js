@@ -2,11 +2,13 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { pool } from "./db.js"; // renamed for clarity
+import { pool } from "./database.js"; // renamed for clarity
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./auth.js"
 import cookieParser from "cookie-parser";
+import { sendVerificationCode } from "./mailer.js";
+import crypto from "crypto";
 
 const app = express();
 
@@ -38,8 +40,63 @@ const signupLimiter = rateLimit({
   max: 2, // 20 sign-ups per IP
 });
 
+function generateCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+
+app.post("/api/verify-email", async (req, res) => {
+  const { email, code } = req.body;
+
+  const query = `
+    SELECT user_id, verification_code, verification_expires_at
+    FROM users
+    WHERE email = $1;
+  `;
+
+  const update = `
+    UPDATE users
+    SET email_verified = TRUE, verification_code = NULL, verification_expires_at = NULL
+    WHERE email = $1;
+  `;
+
+  try {
+    const { rows: [user] } = await pool.query(query, [email]);
+
+    if (!user || user.verification_code !== code) {
+      return res.status(400).json({ error: "Invalid verification code." });
+    }
+
+    if (new Date(user.verification_expires_at) < new Date()) {
+      return res.status(400).json({ error: "Verification code expired." });
+    }
+
+    await pool.query(update, [email]);
+
+    // 3. Success → issue JWT and set cookie
+    const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",                           // CSRF protection
+        secure: true,
+        maxAge: 2 * 60 * 60 * 1000,               // 2 hours
+      });
+    
+    return res.status(200).json({ message: "Email verified successfully." });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Verification failed." });
+  }
+});
+
+
 app.post("/api/signup", signupLimiter, async (req, res) => {
   const {
+    user_id,
     firstName,
     lastName,
     email,
@@ -61,12 +118,16 @@ app.post("/api/signup", signupLimiter, async (req, res) => {
 
   const pwHash = await bcrypt.hash(password, 12);
 
+  const verificationCode = generateCode();
+  const codeExpiry = new Date(Date.now() + 15 * 60 * 1000);
+
   const sql = `
     INSERT INTO public.users
            (first_name, last_name, email, password_hashed,
+            verification_code, verification_expires_at,
             date_of_birth, school_status, uni_affiliation)
-    VALUES ($1,$2,$3,$4,$5,$6,$7)
-    RETURNING user_id AS id, first_name, last_name, email, creation_date;
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    RETURNING user_id, first_name, last_name, email, creation_date;
   `;
   
   try {
@@ -77,12 +138,16 @@ app.post("/api/signup", signupLimiter, async (req, res) => {
       lastName,
       email.toLowerCase(),
       pwHash, //password
+      verificationCode,
+      codeExpiry,
       dateOfBirth,
       schoolStatus,
       uniAffiliation || "None",
     ]);
-    return res.status(201).json(user);
-    
+
+    await sendVerificationCode(email, verificationCode);
+    return res.status(200).json({ message: "Verification code has been sent to your email." });
+
   } catch (err) {
     if (err.code === "23505") {
       // unique_violation
@@ -110,13 +175,19 @@ app.post("/api/login", loginLimiter, async (req, res) => {
         WHERE email = $1`,
       [email.toLowerCase()]
     );
+
     if (!u) return res.status(401).json({ error: "Invalid credentials" });
 
     // 2. Check password
     const ok = await bcrypt.compare(password, u.password_hashed);
     if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
-    // 3. Success → issue JWT and set cookie
+    // 3. Check if email is verified
+    if (!u.email_verified) {
+      return res.status(403).json({ error: "Please verify your email first." });
+    }
+
+    // 4. Success → issue JWT and set cookie
     const token = jwt.sign({ id: u.user_id }, process.env.JWT_SECRET, {
       expiresIn: "2h",
     });
