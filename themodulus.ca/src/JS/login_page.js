@@ -1,4 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+  const isLoginPage = window.location.pathname.includes("login") || window.location.pathname.includes("signup");
+
+  if (isLoginPage) {
+    try {
+      const res = await fetch("http://localhost:3000/api/me", {
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        window.location.href = "dashboard.html";
+        return;
+      }
+    } catch (err) {
+      console.warn("Auth check failed:", err.message);
+    }
+  }
+
   // State management
   let currentStep = 1;
   const totalSteps = 3;
@@ -390,6 +408,11 @@ document.addEventListener("DOMContentLoaded", () => {
       try{
         const res = await fetch('http://localhost:3000/api/me',{
           credentials:'include'});
+
+        if (res.status === 401) {
+        window.location.href = '/themodulus.ca/website/login_page.html';
+        return;
+        }
 
         if(!res.ok) throw new Error('HTTP '+res.status);
         const json = await res.json();

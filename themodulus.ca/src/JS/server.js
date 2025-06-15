@@ -62,9 +62,9 @@ app.post("/api/verify-email", async (req, res) => {
   try {
     const { rows: [user] } = await pool.query(query, [email]);
 
-    if (!user || user.verification_code !== code) {
-      return res.status(400).json({ error: "Invalid verification code." });
-    }
+    if (!user || String(user.verification_code).trim() !== String(code).trim()) {
+    return res.status(400).json({ error: "Invalid verification code." });
+  }
 
     if (new Date(user.verification_expires_at) < new Date()) {
       return res.status(400).json({ error: "Verification code expired." });
