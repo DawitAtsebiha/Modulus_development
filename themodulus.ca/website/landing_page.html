@@ -26,6 +26,18 @@
       display: block;
     }
 </style>
+<style>
+  @keyframes gradientMove {
+    0%   { background-position: 0% 0%; }
+    50%  { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+
+  .gradient-move {
+    background-size: 200% 200%;
+    animation: gradientMove 5s ease infinite;
+  }
+</style>
     
 </head>
 <body class="font-[Montserrat]">
@@ -88,7 +100,7 @@
 
   <!-- RIGHT SECTION -->
   <div class="w-1/2 flex items-center justify-center ">
-    <div class="bg-gradient-to-b from-fuchsia-500 to-blue-900 w-4/12 h-2/3 mb-20 rounded-3xl absolute z-10 top-1/4 left-3/5 drop-shadow-2xl"></div>
+    <div class="gradient-move bg-gradient-to-b from-fuchsia-500 to-blue-900 w-4/12 h-2/3 mb-20 rounded-3xl absolute z-10 top-1/4 left-3/5 drop-shadow-2xl"></div>
     <div class="bg-[#E8EAF1] w-2/6 h-2/3 mb-20 rounded-3xl absolute z-20 drop-shadow-xl"></div>
   </div>
 </div>
