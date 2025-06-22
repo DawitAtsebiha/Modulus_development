@@ -322,6 +322,30 @@
               </div>
             </div>
           </form>
+          <form id="verification-form" class="form" style="display: none;">
+            <div class="form-header">
+              <h1>Email Verification</h1>
+              <p class="subtitle">Enter the 6-digit code sent to your email.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="verification-code">Verification Code</label>
+              <input
+                type="text"
+                id="verification-code"
+                maxlength="6"
+                placeholder="123456"
+                required
+              />
+            </div>
+
+            <input type="hidden" id="verify-email" />
+
+            <button type="submit" class="submit-btn">Verify Email</button>
+
+            <p id="verification-error" style="color:red; display:none;"></p>
+            <p id="verification-success" style="color:green; display:none;"></p>
+          </form>
         </div>
       </div>
 

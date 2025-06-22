@@ -1,4 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+  const isLoginPage = window.location.pathname.includes("login") || window.location.pathname.includes("signup");
+
+  if (isLoginPage) {
+    try {
+      const res = await fetch("http://localhost:3000/api/me", {
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        window.location.href = "dashboard.html";
+        return;
+      }
+    } catch (err) {
+      console.warn("Auth check failed:", err.message);
+    }
+  }
+
   // State management
   let currentStep = 1;
   const totalSteps = 3;
@@ -33,7 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
     strengthSegments: document.querySelectorAll(".strength-segment"),
     strengthText: document.querySelector(".strength-text"),
     loginForm: document.getElementById("login-form"),
-    signupForm: document.getElementById("signup-form")
+    signupForm: document.getElementById("signup-form"),
+    verificationForm: document.getElementById("verification-form"),
+    verificationCodeField: document.getElementById("verification-code"),
+    verifyEmailField: document.getElementById("verify-email"),
+    verificationError: document.getElementById("verification-error"),
+    verificationSuccess: document.getElementById("verification-success"),
   };
 
   // Utility functions
@@ -293,7 +316,12 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || "Signup failed");
           
-          playGifThenGo(); 
+          // Show the verification form
+          elements.signupForm.style.display = "none";
+          document.getElementById("verification-form").style.display = "flex";
+
+          // Populate the hidden email field
+          document.getElementById("verify-email").value = formData.email;
 
         } catch (error) {
           alert(error.message);
@@ -301,6 +329,46 @@ document.addEventListener("DOMContentLoaded", () => {
           if (submitBtn) submitBtn.disabled = false;
         }
       });
+      if (elements.verificationForm) {
+      elements.verificationForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const code = elements.verificationCodeField.value.trim();
+      const email = elements.verifyEmailField.value.trim();
+
+      const submitBtn = elements.verificationForm.querySelector("button[type=submit]");
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch("http://localhost:3000/api/verify-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ email, code }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "Verification failed");
+
+        elements.verificationError.style.display = "none";
+        elements.verificationSuccess.textContent = data.message;
+        elements.verificationSuccess.style.display = "block";
+
+        // Optional delay before redirect
+        setTimeout(() => {
+          playGifThenGo();
+        }, 1500);
+
+      } catch (err) {
+        elements.verificationSuccess.style.display = "none";
+        elements.verificationError.textContent = err.message;
+        elements.verificationError.style.display = "block";
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+  });
+}
     }
   }
 
@@ -341,6 +409,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const res = await fetch('http://localhost:3000/api/me',{
           credentials:'include'});
 
+        if (res.status === 401) {
+        window.location.href = '/themodulus.ca/website/login_page.html';
+        return;
+        }
+
         if(!res.ok) throw new Error('HTTP '+res.status);
         const json = await res.json();
         
@@ -357,8 +430,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // logout
     document.getElementById('logout').addEventListener('click',async e=>{
       e.preventDefault();
-      await fetch(API_LOGOUT,{method:'POST',credentials:'include'}).catch(()=>{});
-      window.location.href = '/';
+      await fetch('http://localhost:3000/api/logout',{
+        method:'GET',
+        credentials:'include'
+      }).catch(()=>{});
+      window.location.href = '/themodulus.ca/website/landing_page.html';
     });
 
   loadProfile();

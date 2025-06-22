@@ -7,5 +7,5 @@ export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   // Turn TLS on and skip CA verification (Neon’s cert chain is valid,
   // but skipping verification avoids Windows-OpenSSL hassles in dev)
-  ssl: { rejectUnauthorized: false }
+  ssl: { rejectUnauthorized: false }  
 });
