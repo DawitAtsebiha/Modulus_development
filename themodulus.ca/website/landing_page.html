@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/themodulus.ca/src/CSS/output.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
@@ -29,21 +31,19 @@
 <body class="font-[Montserrat]">
     <!-- NAV BAR -->
         <div class="w-screen flex items-center justify-between p-12 h-16 md:h-18 px-4 md:px-12 font-[Montserrat] relative bg-[#F1F0F8]">
-            <img
-            class="h-6 md:h-10"
-            src="/themodulus.ca/visuals/SVGs/moduluswithlogo.svg"
-            alt="Modulus logo"
-            />
+            <div class="w-[32px] mt-1 "><img src="../visuals/SVGs/mod-logo.svg" alt=""></div>
+
+            <div class="text-3xl font-extrabold drop-shadow-2xl ml-2">   modulus</div>
             
             <!-- desktop specific  -->
-            <div class="hidden md:flex flex-1 justify-center space-x-8">
+            <div class="hidden md:flex flex-1 mr-5 justify-center space-x-8">
             <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Features">features</a></button>
             <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Demo">lorem</a></button>
             <button class="text-gray-800 hover:text-gray-600 hover:border-b-2 hover:border-b-[#C974C7]"><a href="#Pricing">pricing</button></a>
             </div>
             
             <div class="hidden md:flex space-x-4">
-            <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
+            <button class="px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
             </div>
             
             <!-- mobile specific -->
@@ -59,28 +59,64 @@
                 <a href="#Demo" class="text-gray-800 py-2 border-b border-gray-100">demo</a>
                 <a href="#" class="text-gray-800 py-2 border-b border-gray-100">pricing</a>
                 <div class="flex flex-col space-y-2 pt-4">
-                <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md"><a href="/themodulus.ca/website/login_page.html">log In</a></button>
-                <button class="px-4 py-2 rounded-md border border-black bg-black text-white text-md"><a href="/themodulus.ca/website/login_page.html">sign Up</a></button>
+                <button class="px-4 py-2 rounded-md border border-black bg-white text-black text-md"><a href="/themodulus.ca/website/login_page.html">Log In</a></button>
+                
                 </div>
             </div>
             </div>
         </div>
 
-
-    <div class="w-screen h-screen bg-[#F1F0F8]">
-        <div class="flex flex-col">
-            <div class="w-screen h-1/4 flex justify-center mt-20 text-8xl drop-shadow-2xl font-bold">
-                Learn What&NonBreakingSpace;<span class="font-bold text-transparent drop-shadow-2xl bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">Matters</span>
-            </div>
-            <div class="flex flex-row w-screen h-3/4">
-                <div class=""></div>
-                <div class=""></div>
-            </div>
-        </div>
-
-
+        <!-- SECTION 1 -->
+<div class="flex w-screen h-screen bg-[#F1F0F8] font-[Montserrat]">
+  <!-- LEFT SECTION-->
+  <div class="w-1/2 flex flex-col items-center justify-center mb-32 ml-12">
+    <div class=" text-9xl drop-shadow-2xl font-bold text-center">
+      <span>Learn What</span>
+      <span class="bg-gradient-to-r from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">Matters</span>
     </div>
-    <div class="w-screen h-screen bg-[#F1F0F8]"></div>
+    <div class=" w-3/5 pt-8 text-2xl drop-shadow-2xl text-center text-gray-500 font-[Inter]">
+      Personalized study paths built from your engineering curriculum. Master tough concepts, reinforce them with smart practice, and walk into every exam confident.
+    </div>
+    <div class="mt-12">
+      <button
+        class="px-12 py-4 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-2xl hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"
+      >
+        <a href="">Start Learning</a>
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT SECTION -->
+  <div class="w-1/2 flex items-center justify-center ">
+    <div class="bg-gradient-to-b from-fuchsia-500 to-blue-900 w-4/12 h-2/3 mb-20 rounded-3xl absolute z-10 top-1/4 left-3/5 drop-shadow-2xl"></div>
+    <div class="bg-[#E8EAF1] w-2/6 h-2/3 mb-20 rounded-3xl absolute z-20 drop-shadow-xl"></div>
+  </div>
+</div>
+    
+<section class="relative py-36 bg-gray-200 overflow-hidden">
+  <!-- ORB -->
+  <div
+    class="absolute top-0 right-40 w-72 h-72 bg-pink-300 rounded-full
+           filter blur-3xl opacity-80
+           transform translate-x-1/2 -translate-y-1/2"
+  ></div>
+
+  <!-- frosted glass banner -->
+  <div class="relative w-full max-w-4xl mx-auto bg-gray-600 bg-opacity-30 h-1/4 backdrop-blur-md">
+  </div>
+
+  <!-- moved up with -mt-12 -->
+  <div class="text-3xl text-gray-500 text-center pb-6 -mt-16  tracking-wider" >
+    Designed for top engineering universities in Canada
+  </div>
+  <div class="flex flex-row  space-x-60 mt-6 justify-center items-center drop-shadow-2xl">
+    <img class="w-80 aspect-auto" src="../visuals/PNGs/westerntext.png" alt="">
+    <img class="w-80 aspect-auto" src="../visuals/PNGs/uoftlogotext.png" alt="">
+    <img class="w-80 aspect-auto" src="../visuals/PNGs/yorku logo.png" alt="">
+
+  </div>
+</section>
+    
     
 </body>
 </html>
