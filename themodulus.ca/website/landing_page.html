@@ -37,6 +37,12 @@
     background-size: 200% 200%;
     animation: gradientMove 12s ease infinite;
   }
+
+
+  .gradient-faster {
+    background-size: 200% 200%;
+    animation: gradientMove 7s ease infinite;
+  }
 </style>
     
 </head>
@@ -84,7 +90,7 @@
   <div class="w-1/2 flex flex-col items-center justify-center mb-32 ml-12">
     <div class=" text-9xl drop-shadow-2xl font-bold text-center">
       <span>Learn What</span>
-      <span class="bg-gradient-to-r from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">Matters</span>
+      <span class="gradient-faster bg-gradient-to-b   from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">Matters</span>
     </div>
     <div class=" w-3/5 pt-8 text-2xl drop-shadow-2xl text-center text-gray-500 font-[Inter]">
       Personalized study paths built from your engineering curriculum. Master tough concepts, reinforce them with smart practice, and walk into every exam confident.
@@ -104,8 +110,9 @@
     <div class="bg-[#E8EAF1] w-2/6 h-2/3 mb-20 rounded-3xl absolute z-20 drop-shadow-xl"></div>
   </div>
 </div>
-    
-<section class="relative py-20 bg-gray-200 overflow-hidden">
+  
+<!-- BANNER 1 -->
+<section class="relative py-16 bg-gray-200 overflow-hidden">
     <!-- ORB -->
     <div
         class="absolute top-5 right-70 w-72 h-72 bg-pink-400 rounded-full
@@ -113,18 +120,39 @@
             transform translate-x-1/2 -translate-y-1/2"
     ></div>
 
-        <div class="relative w-full max-w-4xl mx-auto bg-gray-600 bg-opacity-30 h-1/4 backdrop-blur-md">
+        <div class="relative w-full max-w-4xl mx-auto bg-gray-600 bg-opacity-30 h-1/5 backdrop-blur-md">
         </div>
 
             <div class="text-3xl text-gray-500 text-center pb-6 -mt-10  tracking-wider" >
                 Designed for top engineering universities in Canada
             </div>
-        <div class="flex flex-row  space-x-60 mt-6 justify-center items-center drop-shadow-2xl">
+        <div class="flex flex-row  space-x-60 mt-4 justify-center items-center drop-shadow-2xl">
             <img class="w-80 aspect-auto" src="../visuals/PNGs/westerntext.png" alt="">
             <img class="w-100 aspect-auto" src="../visuals/PNGs/uoftlogowhitetext.png" alt="">
             <img class="w-80 aspect-auto" src="../visuals/PNGs/yorku logo.png" alt="">
 
         </div>
 </section>
+
+<div class="h-screen font-[Montserrat]">
+        <div class="flex space-x-2 bg-[#F1F0F8] h-11/12">
+            <div class="relative flex-1">
+                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 1</span>
+                <div class="absolute inset-x-3 bottom-50 right-11 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl"></div>
+                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl"></div>
+            </div>
+            <div class="relative flex-1">
+                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 2</span>
+                <div class="absolute inset-x-3 bottom-50 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl"></div>
+                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl"></div>
+            </div>
+            <div class="relative flex-1">
+                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 3</span>
+                <div class="absolute inset-x-3 bottom-50 left-11 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl"></div>
+                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
