@@ -261,6 +261,9 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+  .inset-7 {
+    inset: calc(var(--spacing) * 7);
+  }
   .inset-x-0 {
     inset-inline: calc(var(--spacing) * 0);
   }
@@ -413,6 +416,15 @@
   }
   .left-24 {
     left: calc(var(--spacing) * 24);
+  }
+  .left-30 {
+    left: calc(var(--spacing) * 30);
+  }
+  .left-70 {
+    left: calc(var(--spacing) * 70);
+  }
+  .left-80 {
+    left: calc(var(--spacing) * 80);
   }
   .z-0 {
     z-index: 0;
@@ -837,6 +849,9 @@
   .max-w-11\/12 {
     max-width: calc(11/12 * 100%);
   }
+  .max-w-12 {
+    max-width: calc(var(--spacing) * 12);
+  }
   .max-w-\[450px\] {
     max-width: 450px;
   }
@@ -877,6 +892,14 @@
   }
   .-translate-x-1\/12 {
     --tw-translate-x: calc(calc(1/12 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-3 {
+    --tw-translate-x: calc(var(--spacing) * -3);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-3\/4 {
+    --tw-translate-x: calc(calc(3/4 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-translate-x-11 {
@@ -1158,6 +1181,15 @@
   .bg-\[\#F1f0F8\] {
     background-color: #F1f0F8;
   }
+  .bg-\[\#bebebe\] {
+    background-color: #bebebe;
+  }
+  .bg-\[\#dbdcdd\] {
+    background-color: #dbdcdd;
+  }
+  .bg-\[\#e6e6e6\] {
+    background-color: #e6e6e6;
+  }
   .bg-black {
     background-color: var(--color-black);
   }
@@ -1172,6 +1204,9 @@
   }
   .bg-gray-400 {
     background-color: var(--color-gray-400);
+  }
+  .bg-gray-500 {
+    background-color: var(--color-gray-500);
   }
   .bg-gray-600 {
     background-color: var(--color-gray-600);
@@ -1592,6 +1627,15 @@
   .ease-out {
     --tw-ease: var(--ease-out);
     transition-timing-function: var(--ease-out);
+  }
+  .text-shadow-2xs {
+    text-shadow: 0px 1px 0px var(--tw-text-shadow-color, rgb(0 0 0 / 0.15));
+  }
+  .text-shadow-lg {
+    text-shadow: 0px 1px 2px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1)), 0px 3px 2px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1)), 0px 4px 8px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1));
+  }
+  .text-shadow-md {
+    text-shadow: 0px 1px 1px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1)), 0px 1px 2px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1)), 0px 2px 4px var(--tw-text-shadow-color, rgb(0 0 0 / 0.1));
   }
   .group-hover\:border-\[\#C974C7\] {
     &:is(:where(.group):hover *) {
@@ -2194,6 +2238,15 @@
   syntax: "*";
   inherits: false;
 }
+@property --tw-text-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-text-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -2282,6 +2335,8 @@
       --tw-backdrop-sepia: initial;
       --tw-duration: initial;
       --tw-ease: initial;
+      --tw-text-shadow-color: initial;
+      --tw-text-shadow-alpha: 100%;
     }
   }
 }
