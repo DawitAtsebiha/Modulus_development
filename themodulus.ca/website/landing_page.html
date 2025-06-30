@@ -240,32 +240,67 @@
 <!-- SECTION 5 -->
 
 <div class="w-screen h-screen bg-[#E8EAF1] flex justify-center items-center">
-  <!-- FRONT CARD -->
   <div class="relative w-10/12 h-10/12 bg-[#dedee6] rounded-3xl z-20 drop-shadow-2xl overflow-hidden">
-    <!-- notch -->
     <div
       class="
-        absolute
-                       /* pull up half its height */
-        left-1/2              /* center horizontally */
-        transform -translate-x-1/2
-        w-7/12 h-1/12              /* 32px wide, 6px tall => 3px radius */
-        bg-[#E8EAF1]          /* same as outer bg to “erase” */
-        rounded-b-full        /* half-circle on bottom edge */
-        z-30
-        bg-gradient-to-b from-fuchsia-500 to-blue-900 drop-shadow-2xl gradient-move
-        shadow-2xl
+        absolute left-1/2   transform -translate-x-1/2 w-7/12 h-1/12 bg-[#E8EAF1] rounded-b-full  z-30 bg-gradient-to-b from-fuchsia-500 to-blue-900 drop-shadow-2xl gradient-move shadow-2xl
       ">
     </div>
     <!-- … your front-card content here … -->
   </div>
 
-  <!-- BACKGROUND GRADIENT CARD -->
   <div class="gradient-move absolute w-10/12 h-10/12 rounded-3xl z-10 mt-12 bg-gradient-to-b from-fuchsia-500 to-blue-900 drop-shadow-2xl">
-    <!-- … -->
   </div>
 </div>
 
+
+<!-- SECTION 6 -->
+ <div class="w-screen h-screen bg-[#F1F0F8] flex flex-col" >
+  <div class="flex flex-row w-full items-center justify-center mt-80">
+    <img src="../visuals/SVGs/mod-logo.svg" class="w-1/12 mt-8 mr-5" alt="">
+    <div class="text-9xl font-bold ">
+      modulus
+    </div>
+  </div>
+   <div class="flex justify-center items-center">
+    <div class="hidden md:flex space-x-4">
+            <button class="px-12 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-2xl hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"><a href="/themodulus.ca/website/login_page.html">Start Learning</a></button>
+            </div>
+   </div>
+ </div>
+
+
+<div>
+  <footer>
+    <div class="relative overflow-hidden bg-primary pt-24 pb-0 bg-black flex flex-row text-white" >
+      <section class="mx-auto w-full max-w-(--breakpoint-xl) px-6 grid items-center gap-10 md:grid-cols-2 md:items-start">
+          <div class="flex flex-col items-center gap-8 md:items-start">
+            <div class="flex flex-col items-center gap-4 md:items-start pb-24">
+              <div class="font-bold text-2xl">modulus</div>
+              <div class="">© 2025, gradient-move inc. </div>
+              <button class="border-2 border-white rounded-xl px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"><a href="">Contact</a>  </button>
+            </div>
+          </div>
+          <div class="hidden md:flex lg:gap-24 md:gap-10 xl:gap-32">
+            <div class="flex flex-col gap-3">
+              <span class="font-bold text-">SERVICE</span>
+              <div><a href="">Pricing</a> </div>
+              <div><a href="">Refferal Program</a> </div>
+              <div><a href="">Privacy & Terms of Service</a> </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <span class="font-bold text-">OTHER</span>
+              <div><a href="">Contact Us</a> </div>
+              <div><a href="">Guide</a> </div>
+              <div><a href="">Changelog</a> </div>
+            </div>
+            
+          </div>
+          
+      </section>
+    </div>
+  </footer>
+</div>
 
 
 </body>
