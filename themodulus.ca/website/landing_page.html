@@ -237,6 +237,35 @@
             </div>
 </section>
 
+<!-- SECTION 5 -->
+
+<div class="w-screen h-screen bg-[#E8EAF1] flex justify-center items-center">
+  <!-- FRONT CARD -->
+  <div class="relative w-10/12 h-10/12 bg-[#dedee6] rounded-3xl z-20 drop-shadow-2xl overflow-hidden">
+    <!-- notch -->
+    <div
+      class="
+        absolute
+                       /* pull up half its height */
+        left-1/2              /* center horizontally */
+        transform -translate-x-1/2
+        w-7/12 h-1/12              /* 32px wide, 6px tall => 3px radius */
+        bg-[#E8EAF1]          /* same as outer bg to “erase” */
+        rounded-b-full        /* half-circle on bottom edge */
+        z-30
+        bg-gradient-to-b from-fuchsia-500 to-blue-900 drop-shadow-2xl gradient-move
+        shadow-2xl
+      ">
+    </div>
+    <!-- … your front-card content here … -->
+  </div>
+
+  <!-- BACKGROUND GRADIENT CARD -->
+  <div class="gradient-move absolute w-10/12 h-10/12 rounded-3xl z-10 mt-12 bg-gradient-to-b from-fuchsia-500 to-blue-900 drop-shadow-2xl">
+    <!-- … -->
+  </div>
+</div>
+
 
 
 </body>
