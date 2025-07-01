@@ -7,8 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <title>Modulus</title>
 
@@ -87,17 +85,17 @@
         <!-- SECTION 1 -->
 <div class="flex w-screen h-screen bg-[#F1F0F8] font-[Montserrat]">
   <!-- LEFT SECTION-->
-  <div class="w-1/2 flex flex-col items-center justify-center mb-32 ml-12">
-    <div class=" text-9xl drop-shadow-2xl font-bold text-center">
+  <div class="lg:w-1/2 flex flex-col items-center justify-center mb-32 lg:ml-12">
+    <div class=" lg:text-9xl drop-shadow-2xl font-bold text-center text-5xl md:text-5xl">
       <span>Learn What</span>
-      <span class="gradient-faster bg-gradient-to-b   from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent">Matters</span>
+      <span class="gradient-faster bg-gradient-to-b   from-fuchsia-500 to-indigo-600 bg-clip-text text-transparent text-5xl lg:text-9xl">Matters</span>
     </div>
-    <div class=" w-3/5 pt-8 text-2xl drop-shadow-2xl text-center text-gray-500 font-[Inter]">
+    <div class=" w-4/5 lg:w-3/5 pt-8 lg:text-2xl text-md drop-shadow-2xl text-center text-gray-500 font-[Inter]">
       Personalized study paths built from your engineering curriculum. Master tough concepts, reinforce them with smart practice, and walk into every exam confident.
     </div>
     <div class="mt-12">
       <button
-        class="px-12 py-4 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-2xl hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"
+        class="lg:px-12 lg:py-4 px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-sm lg:text-2xl hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"
       >
         <a href="">Start Learning</a>
       </button>
@@ -105,74 +103,104 @@
   </div>
 
   <!-- RIGHT SECTION -->
-  <div class="w-1/2 flex items-center justify-center ">
+  <div class="hidden md:w-1/2 lg:w-1/2 lg:flex items-center justify-center ">
     <div class="gradient-move bg-gradient-to-b from-fuchsia-500 to-blue-900 w-4/12 h-2/3 mb-20 rounded-3xl absolute z-10 top-1/4 left-3/5 drop-shadow-2xl"></div>
     <div class="bg-[#E8EAF1] w-2/6 h-2/3 mb-20 rounded-3xl absolute z-20 drop-shadow-xl"></div>
   </div>
 </div>
   
 <!-- BANNER 1 -->
-<section class="relative py-16 bg-[#dbdcdd] overflow-hidden">
+<section class="relative lg:py-16 bg-[#dbdcdd] overflow-hidden">
     <!-- ORB -->
     <div
-        class="absolute top-5 right-70 w-72 h-72 bg-pink-400 rounded-full
-            filter blur-3xl opacity-70
+        class="absolute top-5 right-70 lg:w-72 lg:h-72 w-32 h-32 bg-pink-400 rounded-full
+            filter blur-3xl lg:opacity-70 opacity-90
             transform translate-x-1/2 -translate-y-1/2"
     ></div>
 
         <div class="relative w-full max-w-4xl mx-auto bg-gray-600 bg-opacity-30 h-1/5 backdrop-blur-md">
         </div>
 
-            <div class="text-3xl text-gray-500 text-center pb-6 -mt-10  tracking-wider " >
+            <div class="lg:text-3xl text-xl md:text-3xl text-gray-500 text-center pb-6 lg:-mt-10 mt-5 tracking-wider " >
                 Designed for top engineering universities in Canada
             </div>
-        <div class="flex flex-row  space-x-60 mt-4 justify-center items-center drop-shadow-2xl">
-            <img class="w-80 aspect-auto" src="../visuals/PNGs/westerntext.png" alt="">
-            <img class="w-100 aspect-auto" src="../visuals/PNGs/uoftlogowhitetext.png" alt="">
-            <img class="w-80 aspect-auto" src="../visuals/PNGs/yorku logo.png" alt="">
+        <div class="flex lg:flex-row md:flex-row  lg:space-x-60 space-x-12 md:space-x-2 mt-4 justify-center items-center drop-shadow-2xl">
+            <img class="lg:w-80 md:w-60 w-24  aspect-auto" src="../visuals/PNGs/westerntext.png" alt="">
+            <img class="lg:w-100 md:w-80 w-24 aspect-auto" src="../visuals/PNGs/uoftlogowhitetext.png" alt="">
+            <img class="lg:w-80 md:w-60 w-24 aspect-auto" src="../visuals/PNGs/yorku logo.png" alt="">
 
         </div>
 </section>
 
 <!-- SECTION 2-->
-
 <div class="h-screen font-[Montserrat]">
-        <div class="flex space-x-2 bg-[#F1F0F8] h-11/12 text-shadow-2xs">
-            <div class="relative flex-1">
-                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 1</span>
-                <div class="absolute inset-x-3 bottom-50 left-11 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl"></div>
-                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl min-w-max">
-                  <div class=" flex flex-col items-center justify-center">
-                      <div class="mt-6 text-2xl text-gray-600 font-light">Percision Setup</div>
-                      <div class="text-center mt-12 text-[#94709E] w-3/4">Tell us your university, courses, and <br> professors. We'll build your <br> personalized  curriculum map.</div>
-                  </div>
-                </div>
-            </div>
-            <div class="relative flex-1">
-                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 2</span>
-                <div class="absolute inset-x-3 bottom-50 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl"></div>
-                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl">
-                  <div class=" flex flex-col items-center justify-center">
-                      <div class="mt-6 text-2xl text-gray-600 font-light">Intelligent Learning</div>
-                      <div class="text-center mt-12 text-[#94709E] w-3/4">Follow your custom study path with interactive lessons, targeted practice problems, and instant comprehension checks.</div>
-                  </div>
-                </div>
-            </div>
-            <div class="relative flex-1">
-                <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">step 3</span>
-                <div class="absolute inset-x-3 bottom-50 right-11 mx-auto w-2/3 h-3/5 bg-gradient-to-b from-fuchsia-500 to-blue-900 rounded-3xl drop-shadow-2xl "></div>
-                <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5 bg-[#E8EAF1] rounded-3xl drop-shadow-xl">
-                  <div class=" flex flex-col items-center justify-center">
-                      <div class="mt-6 text-2xl text-gray-600 font-light">Exam Mastery</div>
-                      <div class="text-center mt-12 text-[#94709E] w-3/4">Walk into every exam confident, prepared, and ready  to demonstrate your engineering knowledge.</div>
-                  </div>
-                </div>
-            </div>
+  <div class="flex flex-col md:flex-row 
+              bg-[#F1F0F8] h-11/12 text-shadow-2xs
+              space-y-4 md:space-y-0 md:space-x-2
+              px-4 md:px-0">
+    <!-- step 1 -->
+    <div class="relative flex-1 w-full md:w-auto">
+      <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">
+        step 1
+      </span>
+      <div class="absolute inset-x-3 bottom-50 left-11 mx-auto w-2/3 h-3/5
+                  bg-gradient-to-b from-fuchsia-500 to-blue-900
+                  rounded-3xl drop-shadow-2xl"></div>
+      <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5
+                  bg-[#E8EAF1] rounded-3xl drop-shadow-xl">
+        <div class="flex flex-col items-center justify-center h-full">
+          <div class="mt-6 text-2xl text-gray-600 font-light">Precision Setup</div>
+          <div class="text-center mt-12 text-[#94709E] w-3/4">
+            Tell us your university, courses, and <br>
+            professors. We'll build your personalized curriculum map.
+          </div>
         </div>
-        <div class="h-1/12 bg-[#F1f0F8]">
-
-        </div>
+      </div>
     </div>
+
+    <!-- step 2 -->
+    <div class="relative flex-1 w-full md:w-auto">
+      <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">
+        step 2
+      </span>
+      <div class="absolute inset-x-3 bottom-50 mx-auto w-2/3 h-3/5
+                  bg-gradient-to-b from-fuchsia-500 to-blue-900
+                  rounded-3xl drop-shadow-2xl"></div>
+      <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5
+                  bg-[#E8EAF1] rounded-3xl drop-shadow-xl">
+        <div class="flex flex-col items-center justify-center h-full">
+          <div class="mt-6 text-2xl text-gray-600 font-light">Intelligent Learning</div>
+          <div class="text-center mt-12 text-[#94709E] w-3/4">
+            Follow your custom study path with interactive lessons,<br>
+            targeted practice problems, and instant comprehension checks.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="relative flex-1 w-full md:w-auto">
+      <span class="absolute top-16 left-1/2 transform -translate-x-1/2 text-center tracking-widest text-3xl text-gray-900">
+        step 3
+      </span>
+      <div class="absolute inset-x-3 bottom-50 right-11 mx-auto w-2/3 h-3/5
+                  bg-gradient-to-b from-fuchsia-500 to-blue-900
+                  rounded-3xl drop-shadow-2xl"></div>
+      <div class="absolute inset-x-0 bottom-1/4 mx-auto w-2/3 h-3/5
+                  bg-[#E8EAF1] rounded-3xl drop-shadow-xl">
+        <div class="flex flex-col items-center justify-center h-full">
+          <div class="mt-6 text-2xl text-gray-600 font-light">Exam Mastery</div>
+          <div class="text-center mt-12 text-[#94709E] w-3/4">
+            Walk into every exam confident, prepared, and ready<br>
+            to demonstrate your engineering knowledge.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-1/12 bg-[#F1F0F8]"></div>
+</div>
 
 <!-- SECTION 3-->
  <div class="w-screen h-screen bg-[#F1F0F8]">
@@ -277,19 +305,19 @@
           <div class="flex flex-col items-center gap-8 md:items-start">
             <div class="flex flex-col items-center gap-4 md:items-start pb-24">
               <div class="font-bold text-2xl">modulus</div>
-              <div class="">© 2025, gradient-move inc. </div>
+              <div class="">© 2025, modulus inc. </div>
               <button class="border-2 border-white rounded-xl px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"><a href="">Contact</a>  </button>
             </div>
           </div>
-          <div class="hidden md:flex lg:gap-24 md:gap-10 xl:gap-32">
+          <div class="hidden md:flex  lg:gap-24 md:gap-10 xl:gap-32 md:flex-1/2 sm:flex">
             <div class="flex flex-col gap-3">
-              <span class="font-bold text-">SERVICE</span>
+              <span class="font-bold ">SERVICE</span>
               <div><a href="">Pricing</a> </div>
               <div><a href="">Refferal Program</a> </div>
               <div><a href="">Privacy & Terms of Service</a> </div>
             </div>
             <div class="flex flex-col gap-3">
-              <span class="font-bold text-">OTHER</span>
+              <span class="font-bold ">OTHER</span>
               <div><a href="">Contact Us</a> </div>
               <div><a href="">Guide</a> </div>
               <div><a href="">Changelog</a> </div>
