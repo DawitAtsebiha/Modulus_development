@@ -52,6 +52,9 @@ export default function Page({ params }: Params) {
   const pageData = JSON.parse(raw) as { title: string; markdown: string };
 
   return (
+    <>
     <LessonViewer title={pageData.title} markdown={pageData.markdown} />
+    <div><a href="">TEST</a></div>
+    </>
   );
 }
