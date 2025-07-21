@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import LessonViewer from "@/components/LessonViewer";
 
+import Image from "next/image"
+
 type Params = {
   params: {
     courseId: string;
@@ -37,8 +39,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: Params) {
-  const { courseId, lessonId, pageId } = params;
+export default async function Page({ params }: Params) {
+  const { courseId, lessonId, pageId } = await params;
 
   const filePath = path.join(
     process.cwd(),
@@ -53,8 +55,19 @@ export default function Page({ params }: Params) {
 
   return (
     <>
-    <LessonViewer title={pageData.title} markdown={pageData.markdown} />
-    <div><a href="">TEST</a></div>
+    <nav className="h-16 w-screen   bg-[#F2F3F7] font-[Inter] absolute ">
+      <div className="flex items-center justify-start flex-row">
+    <Image src="/SVGs/mod-logo.svg" fill priority alt="modulus logo black" className="max-w-8 max-h-8 ml-6 mt-4"></Image>
+    <div className="px-20 ">
+        <button className="px-6 py-4 hover:bg-[#d9dadd] "><a href="">Home</a></button>
+        <button className="px-6 py-4  hover:bg-[#d9dadd]">Dashboard</button>
+        <button className="px-6 py-4 hover:bg-[#d9dadd]">Courses</button>
+    </div>
+    </div>
+    </nav>
+    <div className="w-screen h-screen bg-[#EEF1F9] flex items-center justify-center">
+      <LessonViewer title={pageData.title} markdown={pageData.markdown} background="#F2F3F7"/>
+    </div>
     </>
   );
 }

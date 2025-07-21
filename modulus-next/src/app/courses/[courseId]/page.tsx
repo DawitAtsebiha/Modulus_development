@@ -6,8 +6,18 @@ interface CoursePageProps {
   params: { courseId: string };
 }
 
-export default function CoursePage({ params }: CoursePageProps) {
-  const { courseId } = params;
+export default async function CoursePage({ params }: CoursePageProps) {
+  const { courseId } = await params;
+
+
+  // grabbing path at which courses live
+  const courseMetaPath = path.join(
+    process.cwd(),
+    "content",
+    "lessons",
+    courseId,
+    "course.json"
+  )
 
   const lessonsRoot = path.join(
     process.cwd(),
