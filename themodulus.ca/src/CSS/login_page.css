@@ -1,6 +1,6 @@
 :root {
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
+  --primary: #aa1aa3;
+  --primary-dark: #801596;
   --secondary: #64748b;
   --success: #10b981;
   --danger: #ef4444;
@@ -56,7 +56,13 @@ body {
 .info-container {
   flex: 1;
   min-width: 350px;
-  background: linear-gradient(135deg, #2563eb, #1e40af);
+  /* Remove the linear‑gradient: */
+  /* background: linear-gradient(135deg, #2563eb, #1e40af); */
+
+  /* Use your wide gradient image instead: */
+  background: url('./loginpagehero.png') no-repeat center center;
+  background-size: cover;
+
   color: white;
   display: flex;
   align-items: center;
