@@ -2,16 +2,24 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 
 export class baseShape {
   constructor(points, {
-    stroke = "black",
-    width  = 0.02,
-    fill   = "none",
-    dashed = false,
-    arrow  = "none",
-    arrowWid = "3",
-    arrowHei = "3",
-    svgTransform = "matrix(200 0 0 -200 350 400)",
+    stroke = "black",   // colour of lines
+    width = 0.02,   // width of lines
+    fill = "none",  // fills the lines with a colour (value is a colour like red, blue, etc.)
+    dashed = false,   // introduces dashed lines (format is: "E D" --> with E representing pixels on and D representing pixels off, to create dashed effect)
+    arrow = "none",   // adds an arrow to the end of a chart/animation, marker-end places it at the end and marker-start places it at the start
+    arrowWid = "3",   // adjsts arrow width
+    arrowHei = "3",   // adjusts arrow height
+
+    svgTransform = "matrix(200 0 0 -200 350 400)"   // matrix transform to move and adjust the functions/graphs (units = 1 px)
+                                                    // format is matrix(a b c d e f) with:
+                                                    // a = scale of x; multiplies all x values by this value
+                                                    // b = y-skew into x; every unit moved right (e) pushes the function b units up (down if negative)
+                                                    // c = x-skew into y; every unit moved up (f) pushes the function c units to the right (left if negative)
+                                                    // d = scale of y; multiplies all y values by this value (SVG transform treats down as positive by default this value should also be negative to flip it the right way)
+                                                    // e = horizontal translate; moves all values to the right by e units (left if negative)
+                                                    // f = vertical translate; moves all values down by f units (up if negative)
   } = {}) {
-    this.points       = points;
+    this.points = points; // has all the points for each function, not neccesary to change
     this.stroke       = stroke;
     this.width        = width;
     this.fill         = fill;
