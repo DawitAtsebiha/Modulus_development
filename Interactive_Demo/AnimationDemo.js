@@ -1,61 +1,53 @@
-class baseShape {
-  constructor(points, {
-    stroke = "black",   // colour of lines
-    width = 0.02,   // width of lines
-    fill = "none",  // fills the lines with a colour (value is a colour like red, blue, etc.)
-    dashed = false,   // introduces dashed lines (format is: "E D" --> with E representing pixels on and D representing pixels off, to create dashed effect)
-    arrow = "none",   // adds an arrow to the end of a chart/animation, marker-end places it at the end and marker-start places it at the start
-    arrowWid = "3",   // adjsts arrow width
-    arrowHei = "3",   // adjusts arrow height
+const SVG_NS = "http://www.w3.org/2000/svg";
 
-    svgTransform = "matrix(200 0 0 -200 350 400)"   // matrix transform to move and adjust the functions/graphs (units = 1 px)
-                                                    // format is matrix(a b c d e f) with:
-                                                    // a = scale of x; multiplies all x values by this value
-                                                    // b = y-skew into x; every unit moved right (e) pushes the function b units up (down if negative)
-                                                    // c = x-skew into y; every unit moved up (f) pushes the function c units to the right (left if negative)
-                                                    // d = scale of y; multiplies all y values by this value (SVG transform treats down as positive by default this value should also be negative to flip it the right way)
-                                                    // e = horizontal translate; moves all values to the right by e units (left if negative)
-                                                    // f = vertical translate; moves all values down by f units (up if negative)
+export class baseShape {
+  constructor(points, {
+    stroke = "black",
+    width  = 0.02,
+    fill   = "none",
+    dashed = false,
+    arrow  = "none",
+    arrowWid = "3",
+    arrowHei = "3",
+    svgTransform = "matrix(200 0 0 -200 350 400)",
   } = {}) {
-    this.points = points; // has all the points for each function, not neccesary to change
-    this.stroke = stroke;
-    this.width = width;
-    this.fill = fill;
-    this.arrow = arrow;
-    this.arrowHei = arrowHei;
-    this.arrowWid = arrowWid;
-    this.dashed = dashed;
+    this.points       = points;
+    this.stroke       = stroke;
+    this.width        = width;
+    this.fill         = fill;
+    this.dashed       = dashed;
+    this.arrow        = arrow;
+    this.arrowWid     = arrowWid;
+    this.arrowHei     = arrowHei;
     this.svgTransform = svgTransform;
   }
 
   appendTo(svg) {
-    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const g = document.createElementNS(SVG_NS, "g");
     g.setAttribute("transform", this.svgTransform);
 
     this.el = this._createElement();
-    this.el.setAttribute("points", this.points.join(" "));
-    this.el.setAttribute("fill", this.fill);
-    this.el.setAttribute("stroke", this.stroke);
-    this.el.setAttribute("stroke-width", this.width);
-    this.el.setAttribute("stroke-linejoin", "miter"); // tells the browser how to draw corners, miter draws a sharp corner; bevel, round, and arcs can also be used
-    this.el.setAttribute("stroke-linecap", "round") // how the ends of a stroked line or path look like, same as linejoin; adjusts the end points of path
+    this.el.setAttribute("points",        this.points.join(" "));
+    this.el.setAttribute("fill",          this.fill);
+    this.el.setAttribute("stroke",        this.stroke);
+    this.el.setAttribute("stroke-width",  this.width);
+    this.el.setAttribute("stroke-linejoin","miter");
+    this.el.setAttribute("stroke-linecap","round");
+    if (this.dashed) this.el.setAttribute("stroke-dasharray", this.dashed);
 
     if (this.arrow !== "none") {
       const markerURL = this.arrowMarker(svg, this.stroke);
-
-      if (this.arrow === "marker-start" || this.arrow === "both") {
+      if (this.arrow === "marker-start" || this.arrow === "both")
         this.el.setAttribute("marker-start", markerURL);
-    }
-
-      if (this.arrow === "marker-end"   || this.arrow === "both") {
+      if (this.arrow === "marker-end"   || this.arrow === "both")
         this.el.setAttribute("marker-end",   markerURL);
     }
-  }
 
-    g.appendChild(this.el); 
+    g.appendChild(this.el);
     svg.appendChild(g);
     return this;
   }
+
 
   autoAnimateDot({ colour = "gold", durationMs = 5000, bounce = true, radius = 0.03 } = {}) {
     this.colour = colour;
@@ -165,77 +157,109 @@ class baseShape {
 
   arrowMarker(svg, colour = "black") {
     const id = `arrow-${colour.replace("#", "")}`;
-
     let marker = svg.querySelector(`#${id}`);
     if (marker) return `url(#${id})`;
 
     let defs = svg.querySelector("defs");
     if (!defs) {
-      defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      defs = document.createElementNS(SVG_NS, "defs");
       svg.insertBefore(defs, svg.firstChild);
     }
 
-    marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+    marker = document.createElementNS(SVG_NS, "marker");
     marker.setAttribute("id", id);
     marker.setAttribute("viewBox", "0 0 10 10");
     marker.setAttribute("refX", "0");
     marker.setAttribute("refY", "5");
-    marker.setAttribute("markerWidth", this.arrowWid);
+    marker.setAttribute("markerWidth",  this.arrowWid);
     marker.setAttribute("markerHeight", this.arrowHei);
     marker.setAttribute("markerUnits", "strokeWidth");
     marker.setAttribute("orient", "auto-start-reverse");
 
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const path = document.createElementNS(SVG_NS, "path");
     path.setAttribute("d", "M 0 0 L 10 5 L 0 10 Z");
     path.setAttribute("fill", colour);
     marker.appendChild(path);
-
     defs.appendChild(marker);
     return `url(#${id})`;
   }
 }
 
 export class polyLine extends baseShape {
-  _createElement() {
-    return document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-  }
+  _createElement() { return document.createElementNS(SVG_NS, "polyline"); }
 }
-
-
 export class polyGon extends baseShape {
-  _createElement() {
-    return document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-  }
+  _createElement() { return document.createElementNS(SVG_NS, "polygon");  }
 }
 
-const range = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => i + from);
+const range = (from, to) =>
+  Array.from({ length: to - from + 1 }, (_, i) => i + from);
 
-export const quadraticFunct   = (N = 500) => range(-N, N)
-  .map(i => { const x = i / N, y = 2 * x * x; return `${x},${y}`; });
-
-export const cubicFunct   = (N = 500) => range(-450, 450)
-  .map(i => { const x = i / N, y = 2 * x * x * x; return `${x},${y}`; });
-
-export const sineFunct       = (N = 500) => range(0, (N))
+export const quadraticFunct = (N = 500) => range(-N, N)
+  .map(i => { const x = i / N, y = 2 * x * x;      return `${x},${y}`; });
+export const cubicFunct     = (N = 500) => range(-450, 450)
+  .map(i => { const x = i / N, y = 2 * x * x * x;  return `${x},${y}`; });
+export const sineFunct      = (N = 500) => range(0, N)
   .map(i => { const x = 2 * (i / N), y = Math.sin(Math.PI * x); return `${x},${y}`; });
-
-export const cosFunct       = (N = 500) => range(0, (N))
+export const cosFunct       = (N = 500) => range(0, N)
   .map(i => { const x = 2 * (i / N), y = Math.cos(Math.PI * x); return `${x},${y}`; });
-
-export const circleFunct     = (N = 500) => range(0, N)
-  .map(i => {const θ = (i / N) * 2 * Math.PI; return `${Math.cos(θ)},${Math.sin(θ)}`;});
-
-export const expFunct     = (N = 500) => range(-300, 300)
-  .map(i => {const x = i / N, y = Math.exp(x); return `${x},${y}`;});
-
-export const linearFunct       = (N = 300) => range(0, 200)
-  .map(i => { const x = 2 * (i / N), y = x; return `${x},${y}`; });
-
+export const circleFunct    = (N = 500) => range(0, N)
+  .map(i => { const θ = (i / N) * 2 * Math.PI; return `${Math.cos(θ)},${Math.sin(θ)}`;});
+export const expFunct       = (N = 500) => range(-300, 300)
+  .map(i => { const x = i / N, y = Math.exp(x);                  return `${x},${y}`; });
+export const linearFunct    = (N = 300) => range(0, 200)
+  .map(i => { const x = 2 * (i / N), y = x;                      return `${x},${y}`; });
 export const absFunct       = (N = 300) => range(-250, 250)
-  .map(i => { const x = 2 * (i / N), y = Math.abs(x); return `${x},${y}`; });
+  .map(i => { const x = 2 * (i / N), y = Math.abs(x);            return `${x},${y}`; });
+export const sqrtFunct      = (N = 500) => range(0, 300)
+  .map(i => { const x = 2 * (i / N), y = Math.sqrt(x);           return `${x},${y}`; });
 
-export const sqrtFunct       = (N = 500) => range(0, 300)
-  .map(i => { const x = 2 * (i / N), y = Math.sqrt(x); return `${x},${y}`; });
+export const vertAxis  = () => ["0,-1.5", "0,1.5"];
+export const horizAxis = () => ["-1.5,0", "1.5,0"];
 
-export const vertAxis   = (N = 500) => range(0, 1.5).map(y => `0,${y}`);
-export const horizAxis  = (N = 500) => range(0, 1.5).map(x => `${x},0`);
+export function drawGraphBackground(
+  svg,
+  {
+    xMin = -1.5, xMax = 1.5,
+    yMin = -1.5, yMax = 1.5,
+    majorStep = 0.5, minorStep = 0.1,
+    majorColour = "#666", minorColour = "#ddd",
+    majorWidth = 0.01,  minorWidth = 0.005,
+    tickSize   = 0.06,
+    svgTransform = "matrix(200 0 0 -200 350 400)",
+  } = {}
+) {
+  const g = document.createElementNS(SVG_NS, "g");
+  g.setAttribute("transform", svgTransform);
+  svg.appendChild(g);
+
+  const addLine = (x1, y1, x2, y2, stroke, width) => {
+    const ln = document.createElementNS(SVG_NS, "line");
+    ln.setAttribute("x1", x1); ln.setAttribute("y1", y1);
+    ln.setAttribute("x2", x2); ln.setAttribute("y2", y2);
+    ln.setAttribute("stroke", stroke);
+    ln.setAttribute("stroke-width", width);
+    g.appendChild(ln);
+  };
+  const isMajor = v => Math.abs(Math.round(v / majorStep) * majorStep - v) < 1e-9;
+
+  for (let x = Math.ceil(xMin / minorStep) * minorStep; x <= xMax + 1e-9; x += minorStep)
+    addLine(x, yMin, x, yMax, isMajor(x) ? majorColour : minorColour,
+            isMajor(x) ? majorWidth : minorWidth);
+
+  for (let y = Math.ceil(yMin / minorStep) * minorStep; y <= yMax + 1e-9; y += minorStep)
+    addLine(xMin, y, xMax, y, isMajor(y) ? majorColour : minorColour,
+            isMajor(y) ? majorWidth : minorWidth);
+
+  const drawTicks = (end, vertical) => {
+    for (let v = majorStep; v <= end + 1e-9; v += majorStep) {
+      const lines = vertical
+        ? [[-tickSize,  v, tickSize,  v], [-tickSize, -v, tickSize, -v]]
+        : [[ v, -tickSize,  v, tickSize], [-v, -tickSize, -v, tickSize]];
+      lines.forEach(([x1,y1,x2,y2]) => addLine(x1,y1,x2,y2,"#000",0.018));
+    }
+  };
+
+  drawTicks(Math.max(Math.abs(yMin), Math.abs(yMax)), true);  // y ticks
+  drawTicks(Math.max(Math.abs(xMin), Math.abs(xMax)), false); // x ticks
+}
