@@ -11,8 +11,11 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@tailwindcss/cli": "^4.1.9",
+    "clsx": "^2.1.1",
     "matter-js": "^0.20.0",
+    "react-popper": "^2.3.0",
     "tailwindcss": "^4.1.9"
   }
 }
