@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SVG Function Demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; text-align: center; }
+    svg  { border:1px solid #ccc; margin-top: 1rem; }
+    select { font-size: 1rem; padding: 0.2rem 0.4rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Interactive SVG Function Grapher</h1>
+
+  <label>
+    Choose a function:
+    <select>
+      <option value="linear">Linear (y=x)</option>
+      <option value="quad">Quadratic</option>
+      <option value="cubic">Cubic</option>
+      <option value="abs">Absolute Value</option>
+      <option value="sqrt">Square Root</option>
+      <option value="exp">Exponential</option>
+      <option value="circle">Circle</option>
+      <option value="sine">Sine</option>
+      <option value="cos">Cosine</option>
+    </select>
+  </label>
+
+  <svg width="600" height="500" viewBox="0 0 600 500"></svg>
+
+  <script type="module" src="AnimationDemoShowcase.js"></script>
+</body>
+</html>
