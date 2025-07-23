@@ -203,24 +203,11 @@ export class polyGon extends baseShape {
 const range = (from, to) =>
   Array.from({ length: to - from + 1 }, (_, i) => i + from);
 
-export const quadraticFunct = (N = 500) => range(-N, N)
-  .map(i => { const x = i / N, y = 2 * x * x;      return `${x},${y}`; });
-export const cubicFunct     = (N = 500) => range(-450, 450)
-  .map(i => { const x = i / N, y = 2 * x * x * x;  return `${x},${y}`; });
-export const sineFunct      = (N = 500) => range(0, N)
-  .map(i => { const x = 2 * (i / N), y = Math.sin(Math.PI * x); return `${x},${y}`; });
-export const cosFunct       = (N = 500) => range(0, N)
-  .map(i => { const x = 2 * (i / N), y = Math.cos(Math.PI * x); return `${x},${y}`; });
+export const Function    = (N = 300) => range(0, 200)
+  .map(i => { const x = 2 * (i / N), y = parameter; return `${x},${y}`; });
+
 export const circleFunct    = (N = 500) => range(0, N)
   .map(i => { const θ = (i / N) * 2 * Math.PI; return `${Math.cos(θ)},${Math.sin(θ)}`;});
-export const expFunct       = (N = 500) => range(-300, 300)
-  .map(i => { const x = i / N, y = Math.exp(x);                  return `${x},${y}`; });
-export const linearFunct    = (N = 300) => range(0, 200)
-  .map(i => { const x = 2 * (i / N), y = x;                      return `${x},${y}`; });
-export const absFunct       = (N = 300) => range(-250, 250)
-  .map(i => { const x = 2 * (i / N), y = Math.abs(x);            return `${x},${y}`; });
-export const sqrtFunct      = (N = 500) => range(0, 300)
-  .map(i => { const x = 2 * (i / N), y = Math.sqrt(x);           return `${x},${y}`; });
 
 export const vertAxis  = () => ["0,-1.5", "0,1.5"];
 export const horizAxis = () => ["-1.5,0", "1.5,0"];
