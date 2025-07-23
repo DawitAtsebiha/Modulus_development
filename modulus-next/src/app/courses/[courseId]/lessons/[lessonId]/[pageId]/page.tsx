@@ -1,73 +1,88 @@
+// src/app/courses/[courseId]/lessons/[lessonId]/[pageId]/page.tsx
+
 import fs from "fs";
 import path from "path";
+import Link from "next/link";
 import LessonViewer from "@/components/LessonViewer";
+import Image from "next/image";
 
-import Image from "next/image"
+type Props = { params: { courseId: string; lessonId: string; pageId: string } };
 
-type Params = {
-  params: {
-    courseId: string;
-    lessonId: string;
-    pageId: string;
-  };
-};
+export default function Page({ params }: Props) {
+  const { courseId, lessonId, pageId } = params;
 
-export async function generateStaticParams() {
-  const baseDir = path.join(process.cwd(), "content", "lessons");
-  const courses = fs.readdirSync(baseDir);
-  const allParams: Array<{ courseId: string; lessonId: string; pageId: string }> = [];
-
-  for (const courseId of courses) {
-    const lessonsDir = path.join(baseDir, courseId);
-    const lessonIds = fs.readdirSync(lessonsDir);
-
-    for (const lessonId of lessonIds) {
-      const pagesDir = path.join(lessonsDir, lessonId);
-      const pageFiles = fs.readdirSync(pagesDir).filter((f) => f.endsWith(".json"));
-
-      for (const file of pageFiles) {
-        const pageId = path.parse(file).name; 
-        allParams.push({ courseId, lessonId, pageId });
-      }
-    }
-  }
-
-  return allParams.map(({ courseId, lessonId, pageId }) => ({
-    courseId,
-    lessonId,
-    pageId,
-  }));
-}
-
-export default async function Page({ params }: Params) {
-  const { courseId, lessonId, pageId } = await params;
-
-  const filePath = path.join(
+  const lessonDir = path.join(
     process.cwd(),
     "content",
-    "lessons",
+    "courses",
     courseId,
-    lessonId,
-    `${pageId}.json`
+    lessonId
   );
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const pageData = JSON.parse(raw) as { title: string; markdown: string };
+
+  // 1) find all page JSON files, sorted by page number
+  const pageFiles = fs
+    .readdirSync(lessonDir)
+    .filter((f) => f.endsWith(".json"))
+    .sort((a, b) => {
+      const na = parseInt(a.match(/page-(\d+)/)?.[1] || "0", 10);
+      const nb = parseInt(b.match(/page-(\d+)/)?.[1] || "0", 10);
+      return na - nb;
+    });
+
+  // 2) locate current page index
+  const idx = pageFiles.findIndex((f) => f === `${pageId}.json`);
+  const prev = idx > 0 ? pageFiles[idx - 1].replace(/\.json$/, "") : null;
+  const next = idx < pageFiles.length - 1 ? pageFiles[idx + 1].replace(/\.json$/, "") : null;
+
+  const raw = fs.readFileSync(path.join(lessonDir, `${pageId}.json`), "utf-8");
+  const { title, markdown } = JSON.parse(raw) as { title: string; markdown: string };
 
   return (
-    <>
-    <nav className="h-16 w-screen   bg-[#F2F3F7] font-[Inter] absolute ">
-      <div className="flex items-center justify-start flex-row">
-    <Image src="/SVGs/mod-logo.svg" fill priority alt="modulus logo black" className="max-w-8 max-h-8 ml-6 mt-4"></Image>
-    <div className="px-20 ">
-        <button className="px-6 py-4 hover:bg-[#d9dadd] "><a href="">Home</a></button>
-        <button className="px-6 py-4  hover:bg-[#d9dadd]">Dashboard</button>
-        <button className="px-6 py-4 hover:bg-[#d9dadd]">Courses</button>
+    <div className="min-h-screen bg-[#EEF1F9] flex flex-col">
+      <nav className="h-16 w-full bg-[#F2F3F7] flex items-center px-6">
+        <div className="relative w-8 h-8">
+          <Image
+            src="/SVGs/mod-logo.svg"
+            alt="Modulus logo"
+            fill
+            priority
+          />
+        </div>
+        <div className="ml-12 space-x-4">
+          <Link href="/" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Home
+          </Link>
+          <Link href="/dashboard" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Dashboard
+          </Link>
+          <Link href="/courses" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Courses
+          </Link>
+        </div>
+      </nav>
+
+      <main className="flex-1 flex flex-col items-center justify-center p-6">
+        <LessonViewer title={title} markdown={markdown} background="#FFFFFF"/>
+
+        <div className="mt-8 flex space-x-4">
+          {prev && (
+            <Link
+              href={`/courses/${courseId}/lessons/${lessonId}/${prev}`}
+              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+            >
+              ← Previous
+            </Link>
+          )}
+          {next && (
+            <Link
+              href={`/courses/${courseId}/lessons/${lessonId}/${next}`}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Next →
+            </Link>
+          )}
+        </div>
+      </main>
     </div>
-    </div>
-    </nav>
-    <div className="w-screen h-screen bg-[#EEF1F9] flex items-center justify-center">
-      <LessonViewer title={pageData.title} markdown={pageData.markdown} background="#F2F3F7"/>
-    </div>
-    </>
   );
 }

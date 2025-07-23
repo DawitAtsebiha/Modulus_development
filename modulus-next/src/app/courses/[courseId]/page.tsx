@@ -8,13 +8,25 @@ interface CoursePageProps {
 
 export default async function CoursePage({ params }: CoursePageProps) {
   const { courseId } = await params;
+  
+    const courseDir = path.join(
+    process.cwd(),
+    "content",
+    "courses",
+    courseId
+  );
+  
+    const infoPath = path.join(courseDir, "info.json");
+  const infoRaw = fs.readFileSync(infoPath, "utf-8");
+  const info = JSON.parse(infoRaw) as { name: string };
+
 
 
   // grabbing path at which courses live
   const courseMetaPath = path.join(
     process.cwd(),
     "content",
-    "lessons",
+    "courses",
     courseId,
     "course.json"
   )
@@ -22,7 +34,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const lessonsRoot = path.join(
     process.cwd(),
     "content",
-    "lessons",
+    "courses",
     courseId
   );
 
@@ -33,22 +45,16 @@ export default async function CoursePage({ params }: CoursePageProps) {
     );
 
   const lessons = lessonDirs.map((lessonId) => {
-    const pagePath = path.join(
-      lessonsRoot,
-      lessonId,
-      "page-1.json"
-    );
-    const raw = fs.readFileSync(pagePath, "utf-8");
-    const json = JSON.parse(raw) as { title: string };
-    return {
-      id: lessonId,
-      title: json.title,
-    };
+    const pagePath = path.join(courseDir, lessonId, "page-1.json");
+    const pageRaw = fs.readFileSync(pagePath, "utf-8");
+    const page = JSON.parse(pageRaw) as { title: string };
+    return { id: lessonId, title: page.title };
   });
 
   return (
     <main className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6">Course: {courseId}</h1>
+      <h1 className="text-4xl font-bold mb-6">{info.name}</h1>
+
       <ul className="space-y-2">
         {lessons.map((lesson) => (
           <li key={lesson.id}>
@@ -64,3 +70,4 @@ export default async function CoursePage({ params }: CoursePageProps) {
     </main>
   );
 }
+

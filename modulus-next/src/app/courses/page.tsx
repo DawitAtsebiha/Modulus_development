@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function CourseDashboard() {
-  const coursesDir = path.join(process.cwd(), 'content', 'lessons');
+  const coursesDir = path.join(process.cwd(), 'content', 'courses');
   const courseIds = fs
     .readdirSync(coursesDir)
     .filter((name) =>
