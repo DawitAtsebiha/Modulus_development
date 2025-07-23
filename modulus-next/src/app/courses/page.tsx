@@ -1,31 +1,85 @@
+// src/app/courses/page.tsx
 
-import Image from "next/image"
+import fs from 'fs';
+import path from 'path';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default function CourseSelector() {
+export default function CourseDashboard() {
+  const coursesDir = path.join(process.cwd(), 'content', 'lessons');
+  const courseIds = fs
+    .readdirSync(coursesDir)
+    .filter((name) =>
+      fs.statSync(path.join(coursesDir, name)).isDirectory()
+    );
+
+  const courses = courseIds.map((courseId) => {
+    const infoPath = path.join(coursesDir, courseId, 'info.json');
+    let displayName = courseId;
+    try {
+      const infoRaw = fs.readFileSync(infoPath, 'utf-8');
+      const info = JSON.parse(infoRaw);
+      if (info.name) displayName = info.name;
+
+
+    } catch {
+
+    }
+    return { id: courseId, name: displayName}
+  })
+  
 
   return (
-    <main className="p-8 bg-gray-200 w-screen h-screen">
-
-        <h1 className="text-3xl font-bold font-[Inter]">Select your course</h1>
-        <div className="bg-white rounded-2xl h-11/12 font-[Inter]">
-          <div className="flex items-center ">
-            <div className="grid grid-cols-3 w-screen mt-12 mx-5 place-items-center">
-              <a href="">
-              <div className="w-md h-72 border-1  border-gray-200 rounded-2xl flex flex-col drop-shadow-xl">
-                  <div className="w-full rounded-2xl h-10/12 ">
-                  <div className="relative w-full h-full drop">
-                    <Image src="/images/courseBanner.PNG" fill priority alt="calculus emoji banner" className="rounded-2xl"></Image>
-                    </div>
-                  </div>
-                  <div className="font-semibold text-2xl my-2 mx-3">Calculus 1</div>
-              </div>
-              </a>
-              <div className="w-md h-72 border-1 border-gray-200 rounded-2xl"></div>
-              <div className="w-md h-72 border-1 border-gray-200 rounded-2xl"></div>
-              
-            </div>
-          </div>
+    <main className="bg-gray-200 min-h-screen">
+      <nav className="h-16 w-full bg-[#F2F3F7] flex items-center px-6">
+        <div className="relative w-8 h-8">
+          <Image
+            src="/SVGs/mod-logo.svg"
+            alt="Modulus logo"
+            fill
+            priority
+          />
         </div>
+        <div className="ml-12 space-x-4">
+          <Link href="/" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Home
+          </Link>
+          <Link href="/dashboard" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Dashboard
+          </Link>
+          <Link href="/courses" className="px-4 py-2 hover:bg-[#d9dadd]">
+            Courses
+          </Link>
+        </div>
+      </nav>
+
+      <section className="mx-12 py-16">
+        <h1 className="text-3xl font-bold">Course Dashboard</h1>
+      </section>
+
+      <section className="mx-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course) => (
+            <Link
+              key={course.id}
+              href={`/courses/${course.id}`}
+              className="block bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
+            >
+              <div className="relative w-full h-48">
+                <Image
+                  src={`/images/${course.id}-banner.png`}
+                  alt={`${course.name} banner`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h2 className="text-xl font-semibold">{course.name}</h2>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
