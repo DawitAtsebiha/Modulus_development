@@ -1,15 +1,13 @@
 import nodemailer from 'nodemailer';
 
-// Change to let so we can assign below
-let transporter;
-
-(async () => {
-  // 1) Create a fresh Ethereal test account
+// Initialize transporter asynchronously via a Promise
+const transporterPromise = (async () => {
+  // Create a fresh Ethereal test account
   const testAccount = await nodemailer.createTestAccount();
   console.log('📬 Ethereal test account', testAccount);
 
-  // 2) Now initialize the transporter using those credentials
-  transporter = nodemailer.createTransport({
+  // Create and verify the transporter
+  const transport = nodemailer.createTransport({
     host: testAccount.smtp.host,
     port: testAccount.smtp.port,
     secure: testAccount.smtp.secure,
@@ -19,18 +17,15 @@ let transporter;
     },
   });
 
-  // 3) Verify the connection configuration
-  transporter.verify((err, success) => {
-    if (err) console.error('Mailer verify failed:', err);
-    else      console.log('✅ Mailer is ready to send messages');
-  });
+  await transport.verify();
+  console.log('✅ Mailer is ready to send messages');
+
+  return transport;
 })();
 
-// 4) Export your send function, which will wait for transporter
 export async function sendVerificationCode(to, code) {
-  if (!transporter) {
-    throw new Error('Mailer not initialized yet');
-  }
+  // Wait for transporter to be ready
+  const transporter = await transporterPromise;
 
   const info = await transporter.sendMail({
     from: `"Modulus Support" <${transporter.options.auth.user}>`,
