@@ -3,11 +3,11 @@
 import Head from 'next/head';
 import Script from 'next/script';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect } from 'react';
 
 export default function LandingPage() {
   useEffect(() => {
-    // Mobile menu functionality
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     
@@ -16,8 +16,6 @@ export default function LandingPage() {
         mobileMenu.classList.toggle('active');
       });
     }
-
-    // Cleanup event listeners
     return () => {
       if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.removeEventListener('click', () => {
@@ -38,7 +36,6 @@ export default function LandingPage() {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="true"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
@@ -80,7 +77,12 @@ export default function LandingPage() {
         {/* NAV BAR */}
         <div className="w-screen flex items-center justify-between p-12 h-16 md:h-18 px-4 md:px-12 relative bg-[#F1F0F8]">
           <div className="w-[32px] mt-1">
-            <img src="/visuals/SVGs/mod-logo.svg" alt="Modulus Logo" />
+            <Image 
+              src="/visuals/SVGs/mod-logo.svg" 
+              alt="Modulus Logo" 
+              width={32}
+              height={32}
+            />
           </div>
 
           <div className="text-3xl font-extrabold drop-shadow-2xl ml-2">
@@ -161,9 +163,9 @@ export default function LandingPage() {
             Designed for top engineering universities in Canada
           </div>
           <div className="flex lg:flex-row md:flex-row lg:space-x-60 space-x-12 md:space-x-2 mt-4 justify-center items-center drop-shadow-2xl">
-            <img src="/visuals/PNGs/westerntext.png" alt="Western University" className="lg:w-80 md:w-60 w-24 aspect-auto" />
-            <img src="/visuals/PNGs/uoftlogowhitetext.png" alt="University of Toronto" className="lg:w-100 md:w-80 w-24 aspect-auto" />
-            <img src="/visuals/PNGs/yorku logo.png" alt="York University" className="lg:w-80 md:w-60 w-24 aspect-auto" />
+            <Image src="/visuals/PNGs/westerntext.png" alt="Western University" width={320} height={80} className="lg:w-80 md:w-60 w-24 aspect-auto" />
+            <Image src="/visuals/PNGs/uoftlogowhitetext.png" alt="University of Toronto" width={400} height={100} className="lg:w-100 md:w-80 w-24 aspect-auto" />
+            <Image src="/visuals/PNGs/yorku logo.png" alt="York University" width={320} height={80} className="lg:w-80 md:w-60 w-24 aspect-auto" />
           </div>
         </section>
 
