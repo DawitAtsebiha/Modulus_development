@@ -2,121 +2,111 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState('login');
+  const [activeTab, setActiveTab] = useState<'login'|'signup'>('login');
   const [currentStep, setCurrentStep] = useState(1);
   const [showVerification, setShowVerification] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [signupPasswordVisible, setSignupPasswordVisible] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
-  // Form data states
   const [loginData, setLoginData] = useState({ email: '', password: '', remember: false });
   const [signupData, setSignupData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    schoolStatus: '',
-    uniAffiliation: '',
-    terms: false
+    email: '', password: '', firstName: '', lastName: '', dateOfBirth: '',
+    schoolStatus: '', uniAffiliation: '', terms: false
   });
 
   useEffect(() => {
-    // Password strength checker
-    const passwordInput = document.getElementById('signup-password') as HTMLInputElement;
-    if (passwordInput) {
-      const handlePasswordChange = () => updatePasswordStrength();
-      passwordInput.addEventListener('input', handlePasswordChange);
-      
-      return () => {
-        passwordInput.removeEventListener('input', handlePasswordChange);
-      };
-    }
+    const pwInput = document.getElementById('signup-password');
+    const handler = () => updatePasswordStrength();
+    pwInput?.addEventListener('input', handler);
+    return () => pwInput?.removeEventListener('input', handler);
   }, [currentStep]);
 
   const updatePasswordStrength = () => {
-    const password = (document.getElementById('signup-password') as HTMLInputElement)?.value || '';
+    const pwd = (document.getElementById('signup-password') as HTMLInputElement)?.value || '';
     const segments = document.querySelectorAll('.strength-segment');
-    const strengthText = document.querySelector('.strength-text');
-    
     let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-
-    segments.forEach((segment, index) => {
-      segment.classList.remove('weak', 'medium', 'strong');
-      if (index < strength) {
-        if (strength <= 2) segment.classList.add('weak');
-        else if (strength === 3) segment.classList.add('medium');
-        else segment.classList.add('strong');
-      }
+    if (pwd.length >= 8) strength++;
+    if (/[A-Z]/.test(pwd)) strength++;
+    if (/[0-9]/.test(pwd)) strength++;
+    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+    segments.forEach((seg, i) => {
+      seg.classList.remove('weak','medium','strong');
+      if (i < strength) seg.classList.add(strength <=2 ? 'weak' : strength===3 ? 'medium' : 'strong');
     });
-
-    if (strengthText) {
-      const strengthLabels = ['Weak', 'Fair', 'Good', 'Strong'];
-      strengthText.textContent = strength > 0 ? strengthLabels[strength - 1] : 'Password strength';
-    }
   };
 
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = (tab: 'login'|'signup') => {
     setActiveTab(tab);
     setCurrentStep(1);
     setShowVerification(false);
+    setError(null);
   };
 
-  const handleNextStep = () => {
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
+  const handleNextStep = () => setCurrentStep(prev => Math.min(prev+1, 3));
+  const handlePrevStep = () => setCurrentStep(prev => Math.max(prev-1, 1));
 
-  const handlePrevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const handleLoginSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log('Login submitted:', loginData);
-  };
-
-  const handleSignupSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle signup logic here
-    console.log('Signup submitted:', signupData);
-    setShowVerification(true);
-    setActiveTab('');
-  };
-
-  const handleVerificationSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle verification logic here
-    console.log('Verification code:', verificationCode);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
-      setShowVerification(false);
-      setActiveTab('login');
-    }, 3000);
-  };
-
-  const getProgressWidth = () => {
-    return `${(currentStep / 3) * 100}%`;
-  };
-
+  const getProgressWidth = () => `${(currentStep / 3) * 100}%`;
   const getStepClass = (step: number) => {
     if (currentStep > step) return 'step completed';
     if (currentStep === step) return 'step active';
     return 'step';
+  };
+
+  const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, credentials: 'include',
+        body: JSON.stringify({ email: loginData.email, password: loginData.password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      window.location.href = '/dashboard';
+    } catch(err: any) {
+      setError(err.message);
+    }
+  };
+
+  const handleSignupSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      // The rewrite in next.config.ts proxies this to http://localhost:3000/api/signup
+      const res = await fetch('/api/signup', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, credentials: 'include',
+        body: JSON.stringify(signupData)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Signup failed');
+      setShowVerification(true);
+    } catch(err: any) {
+      setError(err.message);
+    }
+  };
+
+  const handleVerificationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      const res = await fetch('/api/verify-email', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, credentials: 'include',
+        body: JSON.stringify({ email: signupData.email, code: verificationCode })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Verification failed');
+      setShowSuccess(true);
+      setTimeout(() => window.location.href = '/login', 2000);
+    } catch(err: any) {
+      setError(err.message);
+    }
   };
 
   return (

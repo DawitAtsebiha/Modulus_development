@@ -2,12 +2,12 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { pool } from "./database.js"; // renamed for clarity
+import { pool } from "../../../../modulus-next/lib/database.js"; // renamed for clarity
 import cors from "cors";
 import jwt from "jsonwebtoken";
-import { authMiddleware } from "./auth.js"
+import { authMiddleware } from "../../../../modulus-next/lib/auth.js"
 import cookieParser from "cookie-parser";
-import { sendVerificationCode } from "./mailer.js";
+import { sendVerificationCode } from "../../../../modulus-next/lib/mailer.js";
 
 const app = express();
 
