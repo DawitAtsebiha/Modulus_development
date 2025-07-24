@@ -4,7 +4,10 @@ import { pool } from '@/lib/database';
 import { serialize } from 'cookie';
 
 export async function POST(req: Request) {
-  const { email, code } = await req.json();
+    const body = await req.json()
+    const { email, code } = body
+    console.log('🔥 verify-email body:', body)
+      
 
   const { rows: [row] } = await pool.query(
     `SELECT user_id, verification_code, verification_expires_at FROM public.users WHERE email=$1`,

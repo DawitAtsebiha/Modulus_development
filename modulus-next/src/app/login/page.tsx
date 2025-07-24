@@ -69,7 +69,7 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Login failed');
-      window.location.href = '/dashboard';
+      window.location.href = '/courses';
     } catch(err: any) {
       setError(err.message);
     }
