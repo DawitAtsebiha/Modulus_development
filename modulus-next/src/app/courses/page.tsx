@@ -5,6 +5,7 @@ import path from 'path';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserProfileButton from '@/components/userprofilebutton';
+import CourseTopBar from '@/components/coursestopbar';
 
 
 export default function CourseDashboard() {
@@ -57,20 +58,23 @@ export default function CourseDashboard() {
           <UserProfileButton imagesrc='/SVGs/mod-logo.svg' name='Muslum' university='YORK UNIVERSITY'></UserProfileButton>
           </div>
       </nav>
-
+      <CourseTopBar status={0} current='Courses'></CourseTopBar>
+      <div className='flex items-center justify-center mt-12 '>
+      <div className='w-11/12 h-screen bg-[#F2F3F7] rounded-2xl drop-shadow-xl'>
       <section className="mx-12 py-16">
-        <h1 className="text-3xl font-bold">Course Dashboard</h1>
+        <h1 className="text-3xl font-bold">Welcome NAME</h1>
+        
       </section>
 
-      <section className="mx-12 mb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="mx-12 mb-12 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 ">
           {courses.map((course) => (
             <Link
               key={course.id}
               href={`/courses/${course.id}`}
               className="block bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
             >
-              <div className="relative w-full h-48">
+              <div className="relative w-full h-60">
                 <Image
                   src={`/images/${course.id}-banner.png`}
                   alt={`${course.name} banner`}
@@ -78,13 +82,18 @@ export default function CourseDashboard() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-4">
+              <div className="p-4 flex flex-row">
+                <></>
                 <h2 className="text-xl font-semibold">{course.name}</h2>
+                <h3>&nbsp; &nbsp; currentLesson</h3>
+
               </div>
             </Link>
           ))}
         </div>
       </section>
+      </div>
+      </div>
     </main>
   );
 }
