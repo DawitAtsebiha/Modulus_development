@@ -4,6 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import Image from 'next/image';
+import UserProfileButton from '@/components/userprofilebutton';
+
 
 export default function CourseDashboard() {
   const coursesDir = path.join(process.cwd(), 'content', 'courses');
@@ -31,7 +33,7 @@ export default function CourseDashboard() {
 
   return (
     <main className="bg-gray-200 min-h-screen">
-      <nav className="h-16 w-full bg-[#F2F3F7] flex items-center px-6">
+      <nav className="h-16 w-full bg-[#F2F3F7] flex flex-row items-center px-6">
         <div className="relative w-8 h-8">
           <Image
             src="/SVGs/mod-logo.svg"
@@ -51,6 +53,9 @@ export default function CourseDashboard() {
             Courses
           </Link>
         </div>
+        <div className='ml-auto px-5'>
+          <UserProfileButton imagesrc='/SVGs/mod-logo.svg' name='Muslum' university='YORK UNIVERSITY'></UserProfileButton>
+          </div>
       </nav>
 
       <section className="mx-12 py-16">
