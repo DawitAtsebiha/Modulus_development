@@ -10,7 +10,7 @@ import { pool } from '@/lib/database';
 {/*TODO 
   Add progress bar functionality
   Gray out unavailable courses automatically.
-  
+
   
   
   */}
@@ -66,11 +66,11 @@ export default async function CourseDashboard() {
         </div>
       </nav>
 
-      <CourseTopBar status={0} current="Courses" />
+      <CourseTopBar status={0} current="Courses" o0="All Courses" o1='My Courses' o2='Archived Courses' o3='Course Settings' />
 
       <div className="flex items-center justify-center mt-12">
         <div className="w-11/12 h-screen bg-[#F2F3F7] rounded-2xl drop-shadow-xl">
-          <section className="mx-12 py-16">
+          <section className="mx-12 py-16 flex flex-row ">
             <h1 className="text-3xl font-bold">Welcome <span className='text-[#CE73B7]'>{firstName} </span> </h1>
           </section>
 
@@ -82,7 +82,7 @@ export default async function CourseDashboard() {
                   href={`/courses/${course.id}`}
                   className="block bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
                 >
-                  <div className="relative w-full h-56">
+                  <div className="relative w-full h-58">
                     <Image
                       src={`/images/${course.id}-banner.png`}
                       alt={`${course.name} banner`}
