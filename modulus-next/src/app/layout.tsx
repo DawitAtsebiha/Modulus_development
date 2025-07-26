@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 
 
@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 
 const  monsSans = Montserrat({
   variable: "--font-monserrat",
+})
+
+const interSans = Inter({
+    variable: "--font-inter"
 })
 
 export const metadata: Metadata = {
