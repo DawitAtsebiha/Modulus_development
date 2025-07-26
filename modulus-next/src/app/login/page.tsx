@@ -103,7 +103,7 @@ export default function LoginPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Verification failed');
       setShowSuccess(true);
-      setTimeout(() => window.location.href = '/login', 2000);
+      setTimeout(() => window.location.href = '/courses', 2000);
     } catch(err: any) {
       setError(err.message);
     }
