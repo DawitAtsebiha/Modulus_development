@@ -67,7 +67,7 @@ export default async function CourseDashboard() {
           />
         </div>
       </nav>
-
+      
       <CourseTopBar status={0} current="Courses" o0="All Courses" o1='My Courses' o2='Archived Courses' o3='Course Settings' />
 
       <div className="flex items-center justify-center mt-12">

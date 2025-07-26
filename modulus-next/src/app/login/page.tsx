@@ -881,9 +881,7 @@ export default function LoginPage() {
                 </div>
               </div>
                 
-              {/* Step 1: Account Setup */}
               <div className={`signup-step ${currentStep === 1 ? 'active' : ''}`}>
-
                 <div className="form-header">
                   <h1>Join Modulus</h1>
                   <p className="subtitle">Start your engineering education journey</p>
@@ -957,7 +955,6 @@ export default function LoginPage() {
                 </button>
               </div>
 
-              {/* Step 2: Personal Information */}
               <div className={`signup-step ${currentStep === 2 ? 'active' : ''}`}>
                 <div className="form-header">
                   <h1>Personal Information</h1>
@@ -1012,7 +1009,6 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Step 3: Education Information */}
               
               <div className={`signup-step ${currentStep === 3 ? 'active' : ''}`}>
                 
