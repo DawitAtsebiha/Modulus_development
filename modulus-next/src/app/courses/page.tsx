@@ -1,21 +1,25 @@
-// src/app/courses/page.tsx
-
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserProfileButton from '@/components/userprofilebutton';
 import CourseTopBar from '@/components/coursestopbar';
+import { getUserFromSession } from '@/lib/auth';
+import { pool } from '@/lib/database';
+
+export default async function CourseDashboard() {
+  const user = await getUserFromSession();
+  const firstName = user?.firstName || 'Guest';
 
 
-export default function CourseDashboard() {
+  
+
   const coursesDir = path.join(process.cwd(), 'content', 'courses');
   const courseIds = fs
     .readdirSync(coursesDir)
-    .filter((name) =>
-      fs.statSync(path.join(coursesDir, name)).isDirectory()
-    );
+    .filter((name) => fs.statSync(path.join(coursesDir, name)).isDirectory());
 
+ 
   const courses = courseIds.map((courseId) => {
     const infoPath = path.join(coursesDir, courseId, 'info.json');
     let displayName = courseId;
@@ -23,25 +27,16 @@ export default function CourseDashboard() {
       const infoRaw = fs.readFileSync(infoPath, 'utf-8');
       const info = JSON.parse(infoRaw);
       if (info.name) displayName = info.name;
-
-
     } catch {
-
     }
-    return { id: courseId, name: displayName}
-  })
-  
+    return { id: courseId, name: displayName };
+  });
 
   return (
     <main className="bg-gray-200 min-h-screen">
       <nav className="h-16 w-full bg-[#F2F3F7] flex flex-row items-center px-6">
         <div className="relative w-8 h-8">
-          <Image
-            src="/SVGs/mod-logo.svg"
-            alt="Modulus logo"
-            fill
-            priority
-          />
+          <Image src="/SVGs/mod-logo.svg" alt="Modulus logo" fill priority />
         </div>
         <div className="ml-12 space-x-4">
           <Link href="/" className="px-4 py-2 hover:bg-[#d9dadd]">
@@ -54,45 +49,48 @@ export default function CourseDashboard() {
             Courses
           </Link>
         </div>
-        <div className='ml-auto px-5'>
-          <UserProfileButton imagesrc='/SVGs/mod-logo.svg' name='Muslum' university='YORK UNIVERSITY'></UserProfileButton>
-          </div>
-      </nav>
-      <CourseTopBar status={0} current='Courses'></CourseTopBar>
-      <div className='flex items-center justify-center mt-12 '>
-      <div className='w-11/12 h-screen bg-[#F2F3F7] rounded-2xl drop-shadow-xl'>
-      <section className="mx-12 py-16">
-        <h1 className="text-3xl font-bold">Welcome NAME</h1>
-        
-      </section>
-
-      <section className="mx-12 mb-12 ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 ">
-          {courses.map((course) => (
-            <Link
-              key={course.id}
-              href={`/courses/${course.id}`}
-              className="block bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
-            >
-              <div className="relative w-full h-60">
-                <Image
-                  src={`/images/${course.id}-banner.png`}
-                  alt={`${course.name} banner`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4 flex flex-row">
-                <></>
-                <h2 className="text-xl font-semibold">{course.name}</h2>
-                <h3>&nbsp; &nbsp; currentLesson</h3>
-
-              </div>
-            </Link>
-          ))}
+        <div className="ml-auto px-5">
+          <UserProfileButton
+            imagesrc="/SVGs/mod-logo.svg"
+            name={user?.firstName ?? 'User'}
+            university={user?.uniAffiliation ?? 'UNIVERSITY'}
+          />
         </div>
-      </section>
-      </div>
+      </nav>
+
+      <CourseTopBar status={0} current="Courses" />
+
+      <div className="flex items-center justify-center mt-12">
+        <div className="w-11/12 h-screen bg-[#F2F3F7] rounded-2xl drop-shadow-xl">
+          <section className="mx-12 py-16">
+            <h1 className="text-3xl font-bold">Welcome {firstName}</h1>
+          </section>
+
+          <section className="mx-12 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+              {courses.map((course) => (
+                <Link
+                  key={course.id}
+                  href={`/courses/${course.id}`}
+                  className="block bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
+                >
+                  <div className="relative w-full h-60">
+                    <Image
+                      src={`/images/${course.id}-banner.png`}
+                      alt={`${course.name} banner`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-4 flex flex-row">
+                    <h2 className="text-xl font-semibold">{course.name}</h2>
+                    <h3>&nbsp;&nbsp;currentLesson</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </main>
   );
