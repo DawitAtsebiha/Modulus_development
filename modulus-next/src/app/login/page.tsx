@@ -582,7 +582,7 @@ export default function LoginPage() {
         .next-btn,
         .submit-btn {
           flex: 1;
-          padding: 0.75rem;
+          padding: 0.25rem;
           border: none;
           border-radius: var(--border-radius);
           font-size: 1rem;

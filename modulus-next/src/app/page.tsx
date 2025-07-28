@@ -348,7 +348,7 @@ export default function LandingPage() {
             <div className="hidden md:flex lg:gap-24 md:gap-10 xl:gap-32 sm:flex">
               <div className="flex flex-col gap-3">
                 <span className="font-bold">SERVICE</span>
-                <a href="#">Pricing</a>
+                <a href="/info/pricing">Pricing</a>
                 <a href="#">Referral Program</a>
                 <a href="#">Privacy & Terms of Service</a>
               </div>
