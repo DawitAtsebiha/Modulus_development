@@ -53,7 +53,7 @@ const FloatingCard: React.FC = () => {
         }
       `}</style>
       
-      <div className="font-[Montserrat]  absolute">
+      <div className="font-[Montserrat] absolute">
         {/* NAV BAR */}
         <div className="w-screen flex items-center justify-between p-12 h-16 md:h-18 px-4 md:px-12 relative bg-[#F1F0F8]">
           <div className="w-[32px] mt-1">
@@ -115,66 +115,68 @@ const FloatingCard: React.FC = () => {
           )}
         </div>
       
-        <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#F1F0F8] py-2 sm:py-12 ">
-          <div className="animate-float ">
+        <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#F1F0F8] py-2 sm:py-12">
+          <div className="animate-float pointer-events-none">
             <div className="absolute inset-auto h-60 w-60 -translate-x-8 scale-50 mt-30 rounded-full bg-gradient-to-br from-red-300 via-pink-400 to-purple-200 sm:translate-x-20 sm:translate-y-28 sm:scale-100"></div>
           </div>
 
-          <div className="animate-float-fast scale-50 sm:scale-100">
+          <div className="animate-float-fast scale-50 sm:scale-100 pointer-events-none">
             <div className="absolute inset-auto h-60 w-60 -translate-x-56 mt-20 scale-50 rounded-full bg-gradient-to-tr from-red-300 via-pink-300 to-orange-100 sm:-translate-x-80 sm:-translate-y-28 sm:scale-100"></div>
           </div>
-            <div className='z-1 text-center pb-12'> <span className='text-5xl font-bold'>modulus</span><br />
-              <br className=''/><span className='font-medium '> Personalized, curriculum-aligned learning for engineering students</span>
-            </div>
+          
+          <div className='z-1 text-center pb-12'> 
+            <span className='text-5xl font-bold'>modulus</span><br />
+            <br className=''/><span className='font-medium'>Personalized, curriculum-aligned learning for engineering students</span>
+          </div>
+          
           <div className="mb-32">
             <div className="scale-50 sm:scale-100">
-              <div className=" mask pointer-events-none relative z-10 h-[600px] w-[500px] select-none rounded-3xl bg-gray-500/20 p-7 backdrop-blur-2xl flex flex-col text-center">
-                <div className="items-center justify-center font-bold text-2xl text-[#CE73B7] py-4">    Premium Access      
-                </div>
+              <div className="mask relative z-10 h-[600px] w-[500px] rounded-3xl bg-gray-500/20 p-7 backdrop-blur-2xl flex flex-col text-center">
+                <div className="items-center justify-center font-bold text-2xl text-[#CE73B7] py-4">Premium Access</div>
                 <div className='text-5xl font-bold text-black drop-shadow-2xl mb-2'>FREE</div>
                 <div className='text-sm'>First semester free for early adopters</div>
-                <div className='text-xl mb-12'>then <span className='text-blue-950 font-medium'>$7.99 CAD/month</span> </div>
+                <div className='text-xl mb-12'>then <span className='text-blue-950 font-medium'>$7.99 CAD/month</span></div>
                 
-                <div className='items-center justify-center text-center '> 
+                <div className='items-center justify-center text-center'> 
                   <div className="space-y-4 mb-8 text-center justify-center items-center flex flex-col">
-                <div className="flex items-center gap-3 " >
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">Adaptive Learning Engine</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">University-Specific Content</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">AI Learning Assistant</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">Exam & Course Prep Modes</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">Gamified Learning Experience</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
-                  <span className="text-gray-700">Progress Tracking & Analytics</span>
-                </div>
-              </div>
-                  <div>
-                      <Link 
-                        href="/login" 
-                        className="inline-block px-3 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-md transition duration-200 hover:shadow-[4px_4px_0px_0px_theme(colors.purple.400)]"
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">Adaptive Learning Engine</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">University-Specific Content</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">AI Learning Assistant</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">Exam & Course Prep Modes</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">Gamified Learning Experience</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></div>
+                      <span className="text-gray-700">Progress Tracking & Analytics</span>
+                    </div>
+                    <div>
+                      <br />
+                      <Link
+                        href="/login"
+                        className="px-6 py-2 bg-white border border-gray-300 rounded-full text-black font-semibold shadow-sm text-md hover:shadow-[4px_4px_0px_0px_rgba(201,116,199)] transition duration-200"
                       >
                         Start Learning Now
                       </Link>
                     </div>  
-                   </div>
-                   
+                    <div className='text-sm opacity-45'>No payment information required.</div>
+                  </div>
+                </div>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
