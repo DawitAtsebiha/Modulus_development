@@ -4,6 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+{/*  TODO
+    Add affiliate functionality to both frontend and database
+    
+    */}
+
 export default function signedReferralPage(){
 
     return(
