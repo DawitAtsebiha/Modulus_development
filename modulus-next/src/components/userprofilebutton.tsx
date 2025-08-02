@@ -39,7 +39,7 @@ export default function UserProfileButton({ imagesrc, name, university }: UserPr
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
             <li><a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a></li>
             <li><a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a></li>
-            <li><a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Affiliate</a></li>
+            <li><a href="/referral" className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Affiliate</a></li>
             <li><a href="/dashboard" className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a></li>
           </ul>
         </div>
